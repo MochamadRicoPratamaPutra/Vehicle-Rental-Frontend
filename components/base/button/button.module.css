@@ -1,0 +1,24 @@
+.button {
+  border-radius: 8px;
+  outline: none;
+  border: none;
+}
+.button1 {
+  width: 132px;
+  height: 44px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  color: #393939;
+  text-align: center;
+  mix-blend-mode: normal;
+}
+.color1 {
+  background: #ffcd61;
+}
+.color2 {
+  border: 1px solid #ffcd61;
+  box-sizing: border-box;
+  background: none;
+  margin-right: 30px;
+}

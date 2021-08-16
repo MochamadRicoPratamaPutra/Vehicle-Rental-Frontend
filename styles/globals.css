@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito&family=Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish&display=swap');
 html,
 body {
   padding: 0;
@@ -13,4 +16,20 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.text-nunito{
+  font-family: 'Nunito', sans-serif;
+}
+.text-playfair{
+  font-family: 'Playfair Display', serif;
+}
+.text-mulish{
+  font-family: 'Mulish', sans-serif;
+}
+.text-grey{
+  color: rgba(132, 132, 132, 1);
+}
+.text-black{
+  color: rgba(57, 57, 57, 1);
 }
