@@ -65,7 +65,7 @@ export default function Home() {
           </div>
           <hr className={Style.resLine} />
         </div>
-        <div className={Style.contentBox}>
+        <div className="contentBox">
           <div className={Style.cardTitle}>
             <p className="text-playfair text-36 text-bold">Popular in town</p>
             <p className="text-nunito text-17 text-orange">View more {'>'}</p>
@@ -93,7 +93,9 @@ export default function Home() {
               <p className="text-22 text-w700 text-nunito">Edward Newgate</p>
               <p className="text-18 text-nunito text-grey">Founder Circle</p>
             </div>
-            <Card type="testimonial" />
+            <div className={Style.cardTestimony}>
+              <Card type="testimonial" />
+            </div>
           </div>
         </div>
       </Layout>

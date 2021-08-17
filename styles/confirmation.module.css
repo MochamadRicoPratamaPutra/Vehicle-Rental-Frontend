@@ -1,0 +1,103 @@
+.productBox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin-top: 50px;
+}
+.imageProduct {
+  width: 452px;
+  height: 317px;
+}
+.left {
+  width: 452px;
+}
+.left div p {
+  margin: 0;
+}
+.right div p {
+  margin: 0;
+}
+.right {
+  margin-left: 37px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.copy {
+  background: #ffcd61;
+  border-radius: 10px;
+  padding: 9px 16px;
+  border: none;
+}
+.detail {
+  display: flex;
+  margin-top: 30px;
+}
+.box {
+  border: 1px solid #80918e;
+  border-radius: 10px;
+  width: 560px;
+  padding: 35px 59px;
+  margin-bottom: 30px;
+}
+.boxLeft {
+  width: 452px;
+  margin-right: 37px;
+}
+.date {
+  display: flex;
+  justify-content: space-around;
+}
+.payment {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 70px;
+}
+.box2 {
+  border: 1px solid #80918e;
+  box-sizing: border-box;
+  border-radius: 10px;
+  padding: 19px 18px;
+  height: 80px;
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
+  align-items: center;
+}
+.buttonCopy {
+  background: #393939;
+  border-radius: 10px;
+  border: none;
+  padding: 9px 33px;
+}
+.box2 p {
+  margin: 0;
+}
+.payment select {
+  background: #fefefe;
+  border: 1px solid #80918e;
+  box-sizing: border-box;
+  border-radius: 10px;
+  padding: 0px 33px;
+  height: 80px;
+  width: 100%;
+}
+@media (max-width: 576px) {
+  .productBox {
+    flex-direction: column;
+  }
+  .detail {
+    flex-direction: column;
+  }
+  .box {
+    width: 100%;
+  }
+  .payment {
+    flex-direction: column;
+  }
+  .box2 {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Style from './navbar.module.css';
 import Button from '../../base/button';
 import { useState } from 'react';
-const Navbar = ({ isAuth }) => {
+const Navbar = ({ isAuth, navbarOff }) => {
   const [drop, setDrop] = useState(false);
   const handleDropDown = () => {
     if (drop === false) {
@@ -14,7 +14,7 @@ const Navbar = ({ isAuth }) => {
 
   return (
     <div>
-      <div className={Style.container}>
+      <div className={`${navbarOff === true ? 'displayNone' : Style.container}`}>
         <div className={Style.logo}>
           <Image src="/Logo.svg" width="44px" height="44px" />
           <button className={Style.buttonCollapse} onClick={handleDropDown}>
@@ -23,6 +23,7 @@ const Navbar = ({ isAuth }) => {
             <hr />
           </button>
         </div>
+        <hr className={Style.line}/>
         <div className={`text-nunito ${Style.tab} ${drop === false ? `${Style.hidden}` : `${Style.visible}`}`}>
           <p>Home</p>
           <p>Vehicle Type</p>

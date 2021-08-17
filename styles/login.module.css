@@ -1,0 +1,54 @@
+.contentContainer {
+  position: relative;
+}
+.contentContainer p {
+  margin: 0;
+}
+.content {
+  position: absolute;
+  top: 0;
+  padding: 90px 150px;
+  display: flex;
+}
+.leftSide {
+  width: 50%;
+  padding-right: 100px;
+}
+.leftSide p {
+  margin-bottom: 30px;
+}
+.rightSide {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 50%;
+  border-left: 1px solid white;
+  padding-left: 100px;
+}
+.rightSide div {
+  margin-top: 20px;
+}
+.inputBox {
+  background: rgba(255, 255, 255, 0.26);
+  /* height: 79px; */
+  border-radius: 10px;
+  border: none;
+  padding: 23px 40px;
+  outline: none;
+  margin-bottom: 20px;
+}
+.forgotContent{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.button {
+  width: 447px;
+  margin-bottom: 40px;
+}
+.forgotContent input {
+  width: 100%;
+}
+.forgotContent p {
+  margin-bottom: 80px;
+}

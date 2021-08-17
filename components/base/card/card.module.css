@@ -1,5 +1,6 @@
 .cardContainer {
   position: relative;
+  margin-bottom: 30px;
 }
 .image {
   width: 250px;

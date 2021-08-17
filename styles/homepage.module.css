@@ -56,9 +56,6 @@
 .resLine {
   display: none;
 }
-.contentBox{
-  padding: 80px 130px 0px 130px;
-}
 .cardTitle{
   display: flex;
   justify-content: space-between;
@@ -75,6 +72,10 @@
   display: flex;
   width: 200px;
   justify-content: space-between;
+}
+.cardTestimony{
+  margin-left: auto;
+  margin-right: auto;
 }
 @media (max-width: 576px) {
   .imgBg {
@@ -103,5 +104,14 @@
     display: flex;
     padding-left: 30px;
     padding-right: 30px;
+  }
+  .cardTitle{
+    flex-wrap: wrap;
+  }
+  .testimonyBox {
+    flex-direction: column;
+  }
+  .cardTestimony {
+    order: -1;
   }
 }

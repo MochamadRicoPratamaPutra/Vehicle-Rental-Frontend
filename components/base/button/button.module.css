@@ -1,15 +1,14 @@
 .button {
-  border-radius: 8px;
   outline: none;
   border: none;
 }
 .button1 {
+  border-radius: 8px;
   width: 132px;
   height: 44px;
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
-  color: #393939;
   text-align: center;
   mix-blend-mode: normal;
 }
@@ -21,4 +20,50 @@
   box-sizing: border-box;
   background: none;
   margin-right: 30px;
+}
+.color3 {
+  background: rgba(57, 57, 57, 1);
+}
+.color4 {
+  background: rgba(203, 203, 212, 0.2);
+}
+
+.button2 {
+  width: 400px;
+  height: 89px;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: normal;
+  text-align: center;
+  mix-blend-mode: normal;
+}
+
+.like {
+  display: flex;
+  width: 225px;
+  height: 89px;
+  justify-content: space-around;
+  border-radius: 10px;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.button3 {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+}
+.button4 {
+  width: 100%;
+  height: 89px;
+  border-radius: 10px;
+  text-align: center;
+}
+@media (max-width: 576px) {
+  .button2 {
+    width: 100%;
+  }
+  .like {
+    width: 100%;
+  }
 }
