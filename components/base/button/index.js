@@ -9,12 +9,19 @@ const Button = ({ type, to }) => {
         </Link>
       </div>
     );
-  }
-  if (type == 'login') {
+  } else if (type == 'login') {
     return (
       <div>
         <Link href={`/${to}`}>
           <a><button className={`text-nunito ${Style.button} ${Style.button1} ${Style.color2}`}>{type}</button></a>
+        </Link>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <Link href={`/#`}>
+          <a><button className={`text-nunito ${Style.button} ${Style.button1} ${Style.color1}`}>explore</button></a>
         </Link>
       </div>
     );

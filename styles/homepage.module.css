@@ -1,0 +1,107 @@
+.imgBg {
+  width: 100%;
+}
+.contentHome {
+  position: relative;
+}
+.content {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  padding: 70px 121px 124px 121px;
+}
+.title {
+  width: 356px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 64px;
+  line-height: 80px;
+  color: #ffffff;
+  mix-blend-mode: normal;
+}
+.subtitle {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 22px;
+  line-height: 30px;
+  color: #ffffff;
+  margin: 0px;
+}
+.smallLine {
+  background: #ffffff;
+  border-radius: 4px;
+  width: 32px;
+  margin-left: 0px;
+  margin-top: 17px;
+  margin-bottom: 48px;
+}
+.choiceBox {
+  display: flex;
+  width: 500px;
+  justify-content: space-between;
+  margin-bottom: 35px;
+}
+.choiceBox form input {
+  display: none;
+}
+.choiceBox select {
+  width: 220px;
+  height: 52px;
+  padding: 10px 30px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 0.8px solid #afb0b9;
+  box-sizing: border-box;
+  border-radius: 6px;
+}
+.resLine {
+  display: none;
+}
+.contentBox{
+  padding: 80px 130px 0px 130px;
+}
+.cardTitle{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.testimonyBox{
+  display: flex;
+  justify-content: space-between;
+}
+.textBox{
+  width: 450px;
+}
+.star{
+  display: flex;
+  width: 200px;
+  justify-content: space-between;
+}
+@media (max-width: 576px) {
+  .imgBg {
+    display: none;
+  }
+  .content {
+    position: relative;
+    padding: 30px 30px;
+  }
+  .title {
+    color: black;
+    width: 100%;
+  }
+  .subtitle {
+    color: black;
+  }
+  .choiceBox{
+    width: 100%;
+  }
+  .choiceBox select {
+    width: 100%;
+    height: 52px;
+    padding: 10px 10px;
+  }
+  .resLine {
+    display: flex;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}

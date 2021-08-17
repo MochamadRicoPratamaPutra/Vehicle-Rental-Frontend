@@ -1,0 +1,43 @@
+.cardContainer {
+  position: relative;
+}
+.image {
+  width: 250px;
+  height: 332.34px;
+  border-radius: 8px;
+}
+.textBox {
+  position: absolute;
+  background-color: white;
+  bottom: 0px;
+  border-radius: 0px 6px 0px 0px;
+}
+.textBox p {
+  margin: 0;
+}
+.testimonialBox {
+  position: absolute;
+  background-color: white;
+  bottom: 0px;
+  right: 0px;
+  border-radius: 0px 6px 0px 0px;
+}
+.buttonBox {
+  position: absolute;
+  padding: 0px 10px;
+  background-color: white;
+  bottom: 0;
+  border-radius: 0px 6px 0px 0px;
+}
+.plus {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.circle {
+  position: absolute;
+  left: 79.03%;
+  right: 18.06%;
+  top: 61.08%;
+  bottom: 37.4%;
+}
