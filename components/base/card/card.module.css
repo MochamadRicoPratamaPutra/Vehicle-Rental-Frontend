@@ -6,6 +6,7 @@
   width: 250px;
   height: 332.34px;
   border-radius: 8px;
+  object-fit: cover;
 }
 .textBox {
   position: absolute;
@@ -15,6 +16,9 @@
 }
 .textBox p {
   margin: 0;
+}
+.textBox p::first-letter{
+  text-transform: capitalize;
 }
 .testimonialBox {
   position: absolute;

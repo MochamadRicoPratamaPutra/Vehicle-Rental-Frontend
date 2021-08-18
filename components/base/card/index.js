@@ -1,15 +1,20 @@
 import Style from './card.module.css';
-const Card = ({ type }) => {
+import Link from 'next/link';
+const Card = ({ type, img, title, city, id }) => {
   if (type === 'product') {
     return (
       <div>
-        <div className={Style.cardContainer}>
-          <img src="/yogyakarta.png" alt="1" className={Style.image} />
-          <div className={Style.textBox}>
-            <p className="text-nunito text-black text-17 text-w600">Merapi</p>
-            <p className="text-nunito text-grey text-17 text-w400">Yogyakarta</p>
-          </div>
-        </div>
+        <Link href={`/vehicle/${id}`}>
+          <a>
+            <div className={Style.cardContainer}>
+              <img src={img ? img : '/yogyakarta.png'} alt="1" className={Style.image} />
+              <div className={Style.textBox}>
+                <p className="text-nunito text-black text-17 text-w600">{title}</p>
+                <p className="text-nunito text-grey text-17 text-w400">{city}</p>
+              </div>
+            </div>
+          </a>
+        </Link>
       </div>
     );
   } else if (type === 'testimonial') {

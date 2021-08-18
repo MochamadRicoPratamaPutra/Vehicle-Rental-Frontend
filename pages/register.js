@@ -7,7 +7,7 @@ const Register = () => {
       <Layout isAuth={true} navbarOff={true}>
         <div className={Style.contentContainer}>
           <div className={Style.imageContainer}>
-            <img src="/backgroundLogin.svg" alt="img" />
+            <img src="/backgroundLogin.svg" alt="img" className={Style.imageBg}/>
           </div>
           <div className={Style.content}>
             <div className={Style.leftSide}>

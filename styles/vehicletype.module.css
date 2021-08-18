@@ -1,13 +1,35 @@
-.cardTitle{
+.cardTitle {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
-.cap:first-letter{
+.cap:first-letter {
   text-transform: capitalize;
 }
+.pagination {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+  justify-content: space-evenly;
+  margin-top: 30px;
+  align-items: center;
+}
+.sort {
+  border: 1px solid gray;
+  padding: 5px 5px;
+}
+.next {
+  border: 1px solid gray;
+  padding: 5px 5px;
+}
+.prev {
+  border: 1px solid gray;
+  padding: 5px 5px;
+}
 @media (max-width: 576px) {
-  .cardTitle{
+  .cardTitle {
     flex-wrap: wrap;
   }
 }

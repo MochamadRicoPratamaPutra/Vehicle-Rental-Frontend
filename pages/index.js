@@ -2,7 +2,11 @@ import Layout from '../components/Layout';
 import Button from '../components/base/button';
 import Style from '../styles/homepage.module.css';
 import Card from '../components/base/card';
+import Link from 'next/link';
+import { useSelector } from 'react-redux';
 export default function Home() {
+  const user = useSelector((state) => state.user.profile);
+  const isAuth = localStorage.getItem('token') || null;
   return (
     <div>
       <Layout isAuth={true}>
@@ -67,7 +71,20 @@ export default function Home() {
         </div>
         <div className="contentBox">
           <div className={Style.cardTitle}>
-            <p className="text-playfair text-36 text-bold">Popular in town</p>
+            <div className={Style.cardTitle}>
+              <Link href="/add-item">
+                <a>
+                  <button
+                    className={`text-w700 text-nunito text-24 ${Style.plus} ${
+                      user.role !== 'admin' ? 'displayNone' : null
+                    }`}
+                  >
+                    +
+                  </button>
+                </a>
+              </Link>
+              <p className="text-playfair text-36 text-bold">Popular in town</p>
+            </div>
             <p className="text-nunito text-17 text-orange">View more {'>'}</p>
           </div>
           <div className={Style.cardTitle}>

@@ -47,8 +47,8 @@ const Navbar = ({ isAuth, navbarOff }) => {
             </div>
           ) : (
             <div className={Style.buttonContainer}>
-              <Button type="login" to="login" />
-              <Button type="register" to="register" />
+              <Button type="loginNav" to="login" />
+              <Button type="registerNav" to="register" />
             </div>
           )}
         </div>

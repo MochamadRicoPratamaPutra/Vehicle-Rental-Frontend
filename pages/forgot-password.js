@@ -7,7 +7,7 @@ const ForgotPassword = () => {
       <Layout isAuth={true} navbarOff={true}>
         <div className={Style.contentContainer}>
           <div className={Style.imageContainer}>
-            <img src="/backgroundForgotPassword.svg" alt="img" />
+            <img src="/backgroundForgotPassword.svg" alt="img" className={Style.imageBg}/>
           </div>
           <div className={Style.content}>
             <div className={Style.forgotContent}>

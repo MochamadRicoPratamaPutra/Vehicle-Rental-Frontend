@@ -1,6 +1,6 @@
-import Layout from '../../components/Layout';
-import Style from '../../styles/vehicle.module.css';
-import Button from '../../components/base/button';
+import Layout from '../../../components/Layout';
+import Style from '../../../styles/vehicle.module.css';
+import Button from '../../../components/base/button';
 const Vehicle = () => {
   return (
     <div>

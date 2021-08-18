@@ -1,25 +1,42 @@
 import Style from './button.module.css';
 import Link from 'next/link';
-const Button = ({ type, to, text, colorCode }) => {
-  if (type == 'register') {
+import { useDispatch } from 'react-redux';
+import {useRouter} from 'next/router'
+import { login } from '../../../config/action/userAction';
+import swal from 'sweetalert';
+const Button = ({ type, to, text, colorCode, data }) => {
+  const dispatch = useDispatch()
+  const router = useRouter()
+  const handleLogin = async () => {
+    console.log(data);
+    dispatch(login(data))
+      .then((res) => {
+        swal("Sucess Login","Welcome", "success")
+        router.push(`/${to}`);
+      })
+      .catch(() => {
+        swal("error","error", "error");
+      });
+  };
+  if (type == 'registerNav') {
     return (
       <div>
         <Link href={`/${to}`}>
           <a>
             <button className={`text-nunito text-black ${Style.button} ${Style.button1} ${Style.color1}`}>
-              {type}
+              Register
             </button>
           </a>
         </Link>
       </div>
     );
-  } else if (type == 'login') {
+  } else if (type == 'loginNav') {
     return (
       <div>
         <Link href={`/${to}`}>
           <a>
             <button className={`text-nunito text-black ${Style.button} ${Style.button1} ${Style.color2}`}>
-              {type}
+              Login
             </button>
           </a>
         </Link>
@@ -95,14 +112,29 @@ const Button = ({ type, to, text, colorCode }) => {
   } else if (type === 'category') {
     return (
       <div>
-          <select
-            className={`text-nunito text-24 text-w900 ${Style.button} ${Style.button4} ${Style.color3} text-yellow`}
+        <select
+          className={`text-nunito text-24 text-w900 ${Style.button} ${Style.button4} ${Style.color3} text-yellow`}
+        >
+          <option disabled selected value>
+            Add item to?
+          </option>
+          <option value="car">Car</option>
+          <option value="motorbike">Motorbike</option>
+          <option value="bike">Bike</option>
+        </select>
+      </div>
+    );
+  } else if (type === 'login') {
+    return (
+      <div>
+        <a>
+          <button
+            className={`text-nunito text-24 text-w900 ${Style.button} ${Style.button4} ${Style.color1} text-black`}
+            onClick={handleLogin}
           >
-            <option disabled selected value>Add item to?</option>
-            <option value="car">Car</option>
-            <option value="motorbike">Motorbike</option>
-            <option value="bike">Bike</option>
-          </select>
+            Login
+          </button>
+        </a>
       </div>
     );
   } else {
