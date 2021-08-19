@@ -37,6 +37,7 @@
   height: 50px;
   border-radius: 50%;
   margin-left: 20px;
+  object-fit: cover;
 }
 .buttonContainer div {
   margin-left: 20px;

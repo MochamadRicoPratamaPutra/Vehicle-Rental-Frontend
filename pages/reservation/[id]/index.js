@@ -1,7 +1,9 @@
 import Layout from '../../../components/Layout';
 import Style from '../../../styles/vehicle.module.css';
 import Button from '../../../components/base/button';
+import { useSelector } from 'react-redux';
 const Vehicle = () => {
+  const user = useSelector((state) => state.user.profile);
   var today = new Date();
   var dd = today.getDate();
   var mm = today.getMonth() + 1; //January is 0!
@@ -15,7 +17,7 @@ const Vehicle = () => {
   today = yyyy + '-' + mm + '-' + dd;
   return (
     <div>
-      <Layout>
+      <Layout isAuth={user.id ? true : false} vehicle={true}>
         <div className="contentBox">
           <p className="text-nunito text-36">{'<'} Reservation</p>
           <div className={Style.productBox}>

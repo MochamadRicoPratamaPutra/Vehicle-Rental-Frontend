@@ -5,7 +5,9 @@ import { useRouter } from 'next/dist/client/router';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import { useSelector } from 'react-redux';
 const VehicleType = () => {
+  const user = useSelector((state) => state.user.profile);
   const router = useRouter();
   const str = router.query.city;
   const [product, setProduct] = useState([]);
@@ -32,7 +34,7 @@ const VehicleType = () => {
   }, [page, limit, str, sort]);
   return (
     <div>
-      <Layout>
+      <Layout isAuth={user.id ? true : false} vehicle={true}>
         <div className="contentBox">
           <div className={Style.cardTitle}>
             <p className={`text-playfair text-36 text-bold ${Style.cap}`}>{str}</p>
@@ -48,11 +50,11 @@ const VehicleType = () => {
             <>
               {sort === 'desc' ? (
                 <Link href={`/vehicle-type/city/${str}?page=1&limit=4&sort=asc`} >
-                  <a className={Style.sort}>newest</a>
+                  <a className={Style.sort}>oldest</a>
                 </Link>
               ) : (
                 <Link href={`/vehicle-type/city/${str}?page=1&limit=4&sort=desc`} >
-                  <a className={Style.sort}>oldest</a>
+                  <a className={Style.sort}>newest</a>
                 </Link>
               )}
             </>

@@ -3,8 +3,9 @@ import Style from '../styles/addItem.module.css';
 import { useState } from 'react';
 import swal from 'sweetalert';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 const AddItem = () => {
-  // const user = useSelector((state) => state.user.profile);
+  const user = useSelector((state) => state.user.profile);
   const [form, setForm] = useState({
     name: '',
     price: 0,
@@ -59,7 +60,7 @@ const AddItem = () => {
   };
   return (
     <div>
-      <Layout>
+      <Layout isAuth={user.id ? true : false} vehicle={true}>
         <div className="contentBox">
           <p className="text-nunito text-w700 text-36">{'<'} Add new item</p>
           <div className={Style.inputContainer}>

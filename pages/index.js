@@ -6,10 +6,9 @@ import Link from 'next/link';
 import { useSelector } from 'react-redux';
 export default function Home() {
   const user = useSelector((state) => state.user.profile);
-  const isAuth = localStorage.getItem('token') || null;
   return (
     <div>
-      <Layout isAuth={true}>
+      <Layout isAuth={user.id ? true : false} home={true}>
         <div className={Style.contentHome}>
           <img src="/backgroundHome.svg" alt="bg" className={Style.imgBg} />
           <div className={Style.content}>
@@ -85,13 +84,17 @@ export default function Home() {
               </Link>
               <p className="text-playfair text-36 text-bold">Popular in town</p>
             </div>
-            <p className="text-nunito text-17 text-orange">View more {'>'}</p>
+            <Link href="/vehicle-type">
+              <a>
+                <p className="text-nunito text-17 text-orange">View more {'>'}</p>
+              </a>
+            </Link>
           </div>
           <div className={Style.cardTitle}>
-            <Card type="product" />
-            <Card type="product" />
-            <Card type="product" />
-            <Card type="product" />
+            <Card type="town" title="Merapi" city="yogyakarta"/>
+            <Card type="town" title="Monas" city="jakarta"/>
+            <Card type="town" title="Lembang" city="bandung"/>
+            <Card type="town" title="Bromo" city="malang"/>
           </div>
           <p className="text-playfair text-36 text-bold">Testimonial</p>
           <div className={Style.testimonyBox}>

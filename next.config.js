@@ -3,5 +3,7 @@ module.exports = {
   env: {
     REACT_APP_API_URL: process.env.REACT_APP_API_URL,
   },
-
+  images: {
+    domains: ['http://localhost:4000'],
+  },
 }
