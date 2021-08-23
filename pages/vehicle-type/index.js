@@ -2,39 +2,10 @@ import Layout from '../../components/Layout';
 import Style from '../../styles/vehicleType.module.css';
 import Card from '../../components/base/card';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
-const VehicleType = () => {
+const VehicleType = ({ bike, car, motorcycle }) => {
   const user = useSelector((state) => state.user.profile);
-  const [car, setCar] = useState([]);
-  const [bike, setBike] = useState([]);
-  const [motorcycle, setMotorcycle] = useState([]);
-  useEffect(() => {
-    axios
-      .get(
-        `${process.env.REACT_APP_API_URL}/vehicle/?page=1&limit=4&search=type&keyword=bike&column=createdAt&sort=asc`
-      )
-      .then((res) => {
-        setBike(res.data.data.result);
-      })
-      .catch(() => {});
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/vehicle/?page=1&limit=4&search=type&keyword=car&column=createdAt&sort=asc`)
-      .then((res) => {
-        setCar(res.data.data.result);
-      })
-      .catch(() => {});
-    axios
-      .get(
-        `${process.env.REACT_APP_API_URL}/vehicle/?page=1&limit=4&search=type&keyword=motorcycle&column=createdAt&sort=asc`
-      )
-      .then((res) => {
-        setMotorcycle(res.data.data.result);
-      })
-      .catch(() => {});
-  }, []);
-  console.log(car)
   return (
     <div>
       <Layout isAuth={user.id ? true : false} vehicle={true}>
@@ -48,10 +19,10 @@ const VehicleType = () => {
             </Link>
           </div>
           <div className={Style.cardTitle}>
-            <Card type="town" title="Merapi" city="yogyakarta"/>
-            <Card type="town" title="Monas" city="jakarta"/>
-            <Card type="town" title="Lembang" city="bandung"/>
-            <Card type="town" title="Bromo" city="malang"/>
+            <Card type="town" title="Merapi" city="yogyakarta" />
+            <Card type="town" title="Monas" city="jakarta" />
+            <Card type="town" title="Lembang" city="bandung" />
+            <Card type="town" title="Bromo" city="malang" />
           </div>
           <div className={Style.cardTitle}>
             <p className="text-playfair text-36 text-bold">Car</p>
@@ -104,4 +75,72 @@ const VehicleType = () => {
   );
 };
 
+export const getStaticProps = async () => {
+  let bike;
+  await axios
+    .get(`${process.env.REACT_APP_API_URL}/vehicle/?page=1&limit=4&search=type&keyword=bike&column=createdAt&sort=asc`)
+    .then((res) => {
+      bike = res.data.data.result;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  let car;
+  await axios
+    .get(`${process.env.REACT_APP_API_URL}/vehicle/?page=1&limit=4&search=type&keyword=car&column=createdAt&sort=asc`)
+    .then((res) => {
+      car = res.data.data.result;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  let motorcycle;
+  await axios
+    .get(
+      `${process.env.REACT_APP_API_URL}/vehicle/?page=1&limit=4&search=type&keyword=motorcycle&column=createdAt&sort=asc`
+    )
+    .then((res) => {
+      motorcycle = res.data.data.result;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  return {
+    props: {
+      bike,
+      car,
+      motorcycle,
+    },
+  };
+};
+
 export default VehicleType;
+// const [car, setCar] = useState([]);
+  // const [bike, setBike] = useState([]);
+  // const [motorcycle, setMotorcycle] = useState([]);
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       `${process.env.REACT_APP_API_URL}/vehicle/?page=1&limit=4&search=type&keyword=bike&column=createdAt&sort=asc`
+  //     )
+  //     .then((res) => {
+  //       setBike(res.data.data.result);
+  //     })
+  //     .catch(() => {});
+  //   axios
+  //     .get(`${process.env.REACT_APP_API_URL}/vehicle/?page=1&limit=4&search=type&keyword=car&column=createdAt&sort=asc`)
+  //     .then((res) => {
+  //       setCar(res.data.data.result);
+  //     })
+  //     .catch(() => {});
+  //   axios
+  //     .get(
+  //       `${process.env.REACT_APP_API_URL}/vehicle/?page=1&limit=4&search=type&keyword=motorcycle&column=createdAt&sort=asc`
+  //     )
+  //     .then((res) => {
+  //       setMotorcycle(res.data.data.result);
+  //     })
+  //     .catch(() => {});
+  // }, []);
+  // console.log(car)
+  // console.log(bike)

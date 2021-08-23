@@ -4,6 +4,10 @@
   align-items: center;
   flex-wrap: wrap;
 }
+.lastPage {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
 .cap:first-letter {
   text-transform: capitalize;
 }

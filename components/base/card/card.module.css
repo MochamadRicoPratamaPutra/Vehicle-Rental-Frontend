@@ -13,11 +13,12 @@
   background-color: white;
   bottom: 0px;
   border-radius: 0px 6px 0px 0px;
+  padding: 0px 10px;
 }
 .textBox p {
   margin: 0;
 }
-.textBox p::first-letter{
+.textBox p::first-letter {
   text-transform: capitalize;
 }
 .testimonialBox {
@@ -45,4 +46,13 @@
   right: 18.06%;
   top: 61.08%;
   bottom: 37.4%;
+}
+.margining {
+  /* margin-left: 10px; */
+  margin-right: 20px;
+}
+@media (max-width: 576px) {
+  .margining {
+    margin-right: 8px;
+  }
 }

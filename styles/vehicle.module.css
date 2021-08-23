@@ -3,10 +3,16 @@
   justify-content: space-between;
   margin-bottom: 50px;
 }
+.back {
+  border: none;
+  outline: none;
+  background: none;
+}
 .imageProduct {
   width: 610px;
   height: 409px;
   border-radius: 10px;
+  object-fit: contain;
 }
 .descriptionBox {
   display: flex;
@@ -15,6 +21,12 @@
 }
 .descriptionBox div p {
   margin: 0;
+}
+.desc {
+  width: 262px;
+}
+.name {
+  width: 300px;
 }
 .price {
   text-align: end;

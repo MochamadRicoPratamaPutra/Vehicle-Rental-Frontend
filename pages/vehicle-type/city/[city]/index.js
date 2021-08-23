@@ -2,36 +2,12 @@ import Layout from '../../../../components/Layout';
 import Style from '../../../../styles/vehicleType.module.css';
 import Card from '../../../../components/base/card';
 import { useRouter } from 'next/dist/client/router';
-import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
-const VehicleType = () => {
+const VehicleType = ({product, next, prev, str, sort, page, limit}) => {
   const user = useSelector((state) => state.user.profile);
   const router = useRouter();
-  const str = router.query.city;
-  const [product, setProduct] = useState([]);
-  const [next, setNext] = useState([]);
-  const [prev, setPrev] = useState([]);
-  const page = router.query.page;
-  const limit = router.query.limit;
-  const sort = router.query.sort;
-  useEffect(() => {
-    if (!router.isReady) {
-      return;
-    } else {
-      axios
-        .get(
-          `${process.env.REACT_APP_API_URL}/vehicle/?page=${page}&limit=${limit}&search=city&keyword=${str}&column=createdAt&sort=${sort}`
-        )
-        .then((res) => {
-          setProduct(res.data.data.result);
-          setNext(res.data.data.next);
-          setPrev(res.data.data.previous);
-        })
-        .catch(() => {});
-    }
-  }, [page, limit, str, sort]);
   return (
     <div>
       <Layout isAuth={user.id ? true : false} vehicle={true}>
@@ -39,10 +15,10 @@ const VehicleType = () => {
           <div className={Style.cardTitle}>
             <p className={`text-playfair text-36 text-bold ${Style.cap}`}>{str}</p>
           </div>
-          <div className={`${Style.cardTitle} ${Style.wrap}`}>
+          <div className={`${Style.cardTitle} ${Style.wrap} ${parseInt(product.length) === parseInt(limit) ? null : Style.lastPage}`}>
             {product.map((item) => (
               <div>
-                <Card type="product" title={item.name} city={item.city} img={item.img} id={item.id} />
+                <Card type="product" title={item.name} city={item.city} img={item.img} id={item.id} margining={parseInt(product.length) === parseInt(limit) ? null : true}/>
               </div>
             ))}
           </div>
@@ -83,5 +59,73 @@ const VehicleType = () => {
     </div>
   );
 };
-
+export const getServerSideProps = async (context) => {
+  try {
+    const page = context.query.page;
+    const limit = context.query.limit;
+    const str = context.params.city;
+    const sort = context.query.sort;
+    let product;
+    let next;
+    let prev;
+    await axios
+      .get(
+        `${process.env.REACT_APP_API_URL}/vehicle/?page=${page}&limit=${limit}&search=city&keyword=${str}&column=createdAt&sort=${sort}`
+      )
+      .then((res) => {
+        product = res.data.data.result;
+        next = res.data.data.next;
+        prev = res.data.data.previous;
+      });
+    // console.log(product, next, prev)
+    if (!next) {
+      next = null
+    }
+    if (!prev) {
+      prev = null
+    }
+    return {
+      props: {
+        product,
+        next,
+        prev,
+        str,
+        sort,
+        page,
+        limit
+      },
+    };
+  } catch {
+    const str = context.params.city;
+    return {
+      redirect: {
+        destination: `/vehicle-type/city/${str}?page=4&limit=4&sort=asc`,
+        permanent: false,
+      },
+    };
+  }
+};
 export default VehicleType;
+  // const str = router.query.city;
+  // const [product, setProduct] = useState([]);
+  // const [next, setNext] = useState([]);
+  // const [prev, setPrev] = useState([]);
+  // const page = router.query.page;
+  // const limit = router.query.limit;
+  // const sort = router.query.sort;
+  // useEffect(() => {
+  //   if (!router.isReady) {
+  //     return;
+  //   } else {
+  //     axios
+  //       .get(
+  //         `${process.env.REACT_APP_API_URL}/vehicle/?page=${page}&limit=${limit}&search=city&keyword=${str}&column=createdAt&sort=${sort}`
+  //       )
+  //       .then((res) => {
+  //         setProduct(res.data.data.result);
+  //         setNext(res.data.data.next);
+  //         setPrev(res.data.data.previous);
+  //       })
+  //       .catch(() => {});
+  //   }
+  // }, [page, limit, str, sort]);

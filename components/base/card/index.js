@@ -1,12 +1,12 @@
 import Style from './card.module.css';
 import Link from 'next/link';
-const Card = ({ type, img, title, city, id }) => {
+const Card = ({ type, img, title, city, id, margining }) => {
   if (type === 'product') {
     return (
       <div>
         <Link href={`/vehicle/${id}`}>
           <a>
-            <div className={Style.cardContainer}>
+            <div className={`${Style.cardContainer} ${margining ? Style.margining : null}`}>
               <img src={img ? img : '/yogyakarta.png'} alt="1" className={Style.image} />
               <div className={Style.textBox}>
                 <p className="text-nunito text-black text-17 text-w600">{title}</p>
