@@ -32,6 +32,14 @@
   border: 1px solid gray;
   padding: 5px 5px;
 }
+.searchBox {
+  padding: 20px 45px;
+  border: 0.8px solid #afb0b9;
+  box-sizing: border-box;
+  border-radius: 6px;
+  width: 100%;
+  outline: none;
+}
 @media (max-width: 576px) {
   .cardTitle {
     flex-wrap: wrap;

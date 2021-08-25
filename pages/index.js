@@ -4,8 +4,15 @@ import Style from '../styles/homepage.module.css';
 import Card from '../components/base/card';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
+import { useState } from 'react';
 export default function Home() {
   const user = useSelector((state) => state.user.profile);
+  const [form, setForm] = useState({
+    city: '',
+    type: '',
+    prepayment: '',
+    date: '',
+  });
   return (
     <div>
       <Layout isAuth={user.id ? true : false} home={true}>
@@ -21,11 +28,11 @@ export default function Home() {
                   <option disabled selected value>
                     Location
                   </option>
-                  <option value="Bandung">Bandung</option>
-                  <option value="Yogyakarta">Yogyakarta</option>
-                  <option value="Jakarta">Jakarta</option>
-                  <option value="Kalimantan">Kalimantan</option>
-                  <option value="Malang">Malang</option>
+                  <option value="bandung">Bandung</option>
+                  <option value="yogyakarta">Yogyakarta</option>
+                  <option value="jakarta">Jakarta</option>
+                  <option value="kalimantan">Kalimantan</option>
+                  <option value="malang">Malang</option>
                 </select>
                 <input type="submit" />
               </form>
@@ -45,10 +52,10 @@ export default function Home() {
               <form>
                 <select id="prepayment" name="prepayment">
                   <option disabled selected value>
-                    Payment
+                    Prepayment
                   </option>
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
+                  <option value="1">Yes</option>
+                  <option value="2">No</option>
                 </select>
                 <input type="submit" />
               </form>
@@ -91,10 +98,10 @@ export default function Home() {
             </Link>
           </div>
           <div className={Style.cardTitle}>
-            <Card type="town" title="Merapi" city="yogyakarta"/>
-            <Card type="town" title="Monas" city="jakarta"/>
-            <Card type="town" title="Lembang" city="bandung"/>
-            <Card type="town" title="Bromo" city="malang"/>
+            <Card type="town" title="Merapi" city="yogyakarta" />
+            <Card type="town" title="Monas" city="jakarta" />
+            <Card type="town" title="Lembang" city="bandung" />
+            <Card type="town" title="Bromo" city="malang" />
           </div>
           <p className="text-playfair text-36 text-bold">Testimonial</p>
           <div className={Style.testimonyBox}>

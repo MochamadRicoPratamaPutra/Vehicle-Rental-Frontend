@@ -1,7 +1,6 @@
 // reducer user
 const initialState = {
   profile: {},
-  error: null,
 };
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -42,6 +41,11 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         profile: action.payload,
+      };
+    case 'LOGOUT':
+      return {
+        ...state,
+        profile: {},
       };
     default:
       return state;

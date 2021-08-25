@@ -4,8 +4,11 @@ import { useState } from 'react';
 import swal from 'sweetalert';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import AuthenticatedRoute from '../components/authenticatedRoute';
+import { useRouter } from 'next/router';
 const AddItem = () => {
   const user = useSelector((state) => state.user.profile);
+  const router = useRouter()
   const [form, setForm] = useState({
     name: '',
     price: 0,
@@ -62,7 +65,7 @@ const AddItem = () => {
     <div>
       <Layout isAuth={user.id ? true : false} vehicle={true}>
         <div className="contentBox">
-          <p className="text-nunito text-w700 text-36">{'<'} Add new item</p>
+        <button type="button" className={`text-nunito text-36 ${Style.back}`} onClick={() => router.back()}>{'<'} Add new item</button>
           <div className={Style.inputContainer}>
             <div className={Style.leftSide}>
               <input
@@ -152,4 +155,4 @@ const AddItem = () => {
   );
 };
 
-export default AddItem;
+export default AuthenticatedRoute(AddItem, { pathAfterFailure: '/login', admin: true });

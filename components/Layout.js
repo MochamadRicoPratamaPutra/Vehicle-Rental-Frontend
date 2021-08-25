@@ -10,6 +10,7 @@ const Layout = (props) => {
         home={props.home}
         history={props.history}
         about={props.about}
+        searchOff={props.searchOff}
       />
       {props.children}
       <Footer />

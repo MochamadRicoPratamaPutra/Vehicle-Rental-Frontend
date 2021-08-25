@@ -3,14 +3,14 @@ import axios from 'axios';
 export const login = (data) => async (dispatch) => {
   return new Promise((resolve, reject) => {
     const dataBody = { email: data.email, password: data.password };
-    console.log(dataBody);
+    // console.log(dataBody);
     // console.log(process.env.REACT_APP_API_URL)
     return axios
-      .post(`${process.env.REACT_APP_API_URL}/users/login`, dataBody)
+      .post(`${process.env.REACT_APP_API_URL}/users/login`, dataBody, { withCredentials: true })
       .then((res) => {
         const result = res.data.data;
-        console.log(result.role);
-        console.log(result.status);
+        // console.log(result.role);
+        // console.log(result.status);
         if (result.status === 1) {
           dispatch({ type: 'LOGIN_USER', payload: result });
           localStorage.setItem('token', result.token);
@@ -23,7 +23,8 @@ export const login = (data) => async (dispatch) => {
         }
       })
       .catch((err) => {
-        reject(err);
+        console.log(err.message);
+        reject(err.message);
       });
   });
 };
@@ -33,8 +34,8 @@ export const signup = (data) => async (dispatch) => {
       .post(`${process.env.REACT_APP_API_URL}v1/users/register`, data)
       .then((res) => {
         const result = res.data.data;
-        console.log(result.role);
-        console.log(result.status);
+        // console.log(result.role);
+        // console.log(result.status);
         dispatch({ type: 'SIGNUP_USER', payload: result });
         // localStorage.setItem('token', result.token)
         resolve(result);
@@ -48,7 +49,7 @@ export const signup = (data) => async (dispatch) => {
 
 export const sendMail = (data) => async (dispatch) => {
   return new Promise((resolve, reject) => {
-    console.log(data);
+    // console.log(data);
     return axios
       .post(`${process.env.REACT_APP_API_URL}v1/users/confirm`, data)
       .then((res) => {
@@ -80,7 +81,7 @@ export const renewPass = (data) => async (dispatch) => {
 };
 export const editProfile = (data) => (dispatch) => {
   return new Promise((resolve, reject) => {
-    console.log(data);
+    // console.log(data);
     const config = {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -109,6 +110,9 @@ export const editProfile = (data) => (dispatch) => {
         reject(err.response);
       });
   });
+};
+export const logout = () => (dispatch) => {
+  dispatch({ type: 'LOGOUT', payload: '' });
 };
 // const dataResult = result.data
 // console.log(dataResult);

@@ -2,7 +2,7 @@ import Layout from '../components/Layout';
 import Button from '../components/base/button';
 import Style from '../styles/user.module.css';
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
@@ -18,11 +18,17 @@ const User = () => {
   const handleChange = (e) => {
     dispatch({ type: 'CHANGE_VALUE', payload: { [e.target.name]: e.target.value } });
   };
+  const [imgPrev, setImgPrev] = useState(null)
   const handleInputFile = (e) => {
     // console.log(e.target.file)
     // img = URL.createObjectURL(e.target.files[0])
     // console.log(img)
-    dispatch({ type: 'CHANGE_VALUE', payload: { [e.target.name]: e.target.files } });
+    e.preventDefault();
+    if (e.target.files.length !== 0) {
+      setImgPrev(URL.createObjectURL(e.target.files[0]))
+    }
+    console.log(imgPrev)
+    dispatch({ type: 'CHANGE_VALUE', payload: { [e.target.name]: e.target.files[0] } });
   };
   const handleSubmit = (e) => {
     const config = {
@@ -35,7 +41,7 @@ const User = () => {
     formData.append('address', user.address);
     formData.append('birthDate', user.birthDate);
     formData.append('email', user.email);
-    formData.append('profilePicture', user.profilePicture[0], user.profilePicture[0].name);
+    formData.append('profilePicture', user.profilePicture, user.profilePicture.name);
     formData.append('displayName', user.displayName);
     formData.append('phone', user.phone);
     formData.append('gender', user.gender);
@@ -78,8 +84,15 @@ const User = () => {
         <div className="contentBox">
           <p className="text-nunito text-w700 text-36">Profile</p>
           <div className={Style.top}>
-            <img src={user.profilePicture ? user.profilePicture : '/avatar.svg'} alt="profilePicture" className={Style.picture} />
-            <input type="file" name="profilePicture" onChange={handleInputFile} />
+            <img
+              src={user.profilePicture ? user.profilePicture : imgPrev !== null ? imgPrev : '/avatar.svg'}
+              alt="profilePicture"
+              className={Style.picture}
+            />
+            <form onSubmit={handleInputFile} className={Style.inputFile}>
+              <label htmlFor="profilePicture">Change Profile Picture</label>
+              <input type="file" name="profilePicture" id="profilePicture" onChange={handleInputFile} className="displayNone" />
+            </form>
             <p className="text-playfair text-w700 text-48">{user.name}</p>
             <p className="text-nunito text-w700 text-24 text-grey">{user.email}</p>
             <p className="text-nunito text-w700 text-24 text-grey">{user.phone}</p>

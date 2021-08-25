@@ -4,20 +4,43 @@ import { useDispatch } from 'react-redux';
 import {useRouter} from 'next/router'
 import { login } from '../../../config/action/userAction';
 import swal from 'sweetalert';
-const Button = ({ type, to, text, colorCode, data }) => {
+import { useState } from 'react';
+import { updateAmount } from '../../../config/action/reservationAction';
+const Button = ({ type, to, text, colorCode, data, maxAmount }) => {
   const dispatch = useDispatch()
   const router = useRouter()
+  const [amount, setAmount] = useState(0)
   const handleLogin = async () => {
     console.log(data);
     dispatch(login(data))
       .then((res) => {
-        swal("Sucess Login","Welcome", "success")
+        swal("Success Login","Welcome", "success")
         router.push(`/${to}`);
       })
-      .catch(() => {
-        swal("error","error", "error");
+      .catch((err) => {
+        swal(`Error`,`${err}`, "error");
       });
   };
+  const handlePlusAmount = () => {
+    const newAmount = amount + 1
+    if (newAmount < maxAmount) {
+      setAmount(newAmount)
+      dispatch(updateAmount(newAmount))
+    } else {
+      setAmount(maxAmount)
+      dispatch(updateAmount(maxAmount))
+    }
+  }
+  const handleMinusAmount = () => {
+    let newAmount = amount - 1
+    if (newAmount > 0) {
+      setAmount(newAmount)
+      dispatch(updateAmount(amount))
+    } else {
+      setAmount(0)
+      dispatch(updateAmount(0))
+    }
+  }
   if (type == 'registerNav') {
     return (
       <div>
@@ -97,7 +120,26 @@ const Button = ({ type, to, text, colorCode, data }) => {
         </a>
       </div>
     );
-  } else if (type === 'confirmation') {
+  } else if (type === 'plusMinus') {
+    return (
+      <div className={Style.plusMinusBox}>
+          <button
+            className={`text-nunito text-48 text-w900 ${Style.button} ${Style.button3} ${Style.color4} text-black`}
+            onClick={handleMinusAmount}
+          >
+            -
+          </button>
+          <p className="text-48 text-w900 text-nunito">{amount}</p>
+          <button
+            className={`text-nunito text-48 text-w900 ${Style.button} ${Style.button3} ${Style.color1} text-black`}
+            onClick={handlePlusAmount}
+          >
+            +
+          </button>
+      </div>
+    )
+  }
+  else if (type === 'confirmation') {
     return (
       <div>
         <a>

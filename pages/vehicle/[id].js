@@ -1,12 +1,16 @@
 import Layout from '../../components/Layout';
 import Style from '../../styles/vehicle.module.css';
 import Button from '../../components/base/button';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 const Vehicle = ({vehicle}) => {
   const user = useSelector((state) => state.user.profile);
   const router = useRouter()
+  const dispatch = useDispatch()
+  // const handleReservation = () => {
+  //   dispatch()
+  // }
   return (
     <div>
       <Layout isAuth={user.id ? true : false} vehicle={true}>
@@ -30,15 +34,13 @@ const Vehicle = ({vehicle}) => {
                 <p className="text-playfair text-36 text-bold">Rp. {vehicle.price}/day</p>
               </div>
               <div className={Style.amountBox}>
-                <Button type="minus" />
-                <p className="text-48 text-w900 text-nunito">2</p>
-                <Button type="plus" />
+                <Button type="plusMinus" maxAmount={vehicle.stock}/>
               </div>
             </div>
           </div>
           <div className={Style.buttonBox}>
             <Button type="reservation" to="chat" text="Chat admin" colorCode={2} />
-            <Button type="reservation" to="reservation" text="Reservation" colorCode={1} />
+            <Button type="reservation" to="/reservation" text="Reservation" colorCode={1} />
             <Button type="like" to="#" />
           </div>
         </div>

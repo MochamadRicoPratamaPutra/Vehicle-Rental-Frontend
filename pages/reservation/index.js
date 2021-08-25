@@ -1,6 +1,6 @@
-import Layout from '../../../components/Layout';
-import Style from '../../../styles/vehicle.module.css';
-import Button from '../../../components/base/button';
+import Layout from '../../components/Layout';
+import Style from '../../styles/vehicle.module.css';
+import Button from '../../components/base/button';
 import { useSelector } from 'react-redux';
 const Vehicle = () => {
   const user = useSelector((state) => state.user.profile);
@@ -19,7 +19,7 @@ const Vehicle = () => {
     <div>
       <Layout isAuth={user.id ? true : false} vehicle={true}>
         <div className="contentBox">
-          <p className="text-nunito text-36">{'<'} Reservation</p>
+        <button type="button" className={`text-nunito text-36 ${Style.back}`} onClick={() => router.back()}>{'<'} Reservation</button>
           <div className={Style.productBox}>
             <img src="/bike.png" alt="item" className={Style.imageProduct} />
             <div className={Style.descriptionBox}>
@@ -29,9 +29,7 @@ const Vehicle = () => {
                 <p className="text-nunito text-red">No Prepayment</p>
               </div>
               <div className={Style.amountBox}>
-                <Button type="minus" />
-                <p className="text-48 text-w900 text-nunito">2</p>
-                <Button type="plus" />
+                <Button type="plusMinus" maxAmount={10}/>
               </div>
               <div>
                 <p className="text-24 text-w700 text-black">Reservation Date: </p>

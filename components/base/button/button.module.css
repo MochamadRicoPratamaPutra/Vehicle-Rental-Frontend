@@ -59,6 +59,11 @@
   border-radius: 10px;
   text-align: center;
 }
+.plusMinusBox {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
 @media (max-width: 576px) {
   .button2 {
     width: 100%;

@@ -2,6 +2,12 @@
   display: flex;
   margin-bottom: 30px;
 }
+.back {
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+}
 .leftSide {
   display: flex;
   flex-direction: column;

@@ -4,9 +4,16 @@ import Button from '../../base/button';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-const Navbar = ({ isAuth, navbarOff, vehicle, home, history, about }) => {
+import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../../config/action/userAction';
+const Navbar = ({ isAuth, navbarOff, vehicle, home, history, about, searchOff }) => {
+  const dispatch = useDispatch();
+  const router = useRouter();
   const [drop, setDrop] = useState(false);
   const user = useSelector((state) => state.user.profile);
+  const [search, setSearch] = useState('');
+  const [dropUser, setDropUser] = useState(false);
   const handleDropDown = () => {
     if (drop === false) {
       setDrop(true);
@@ -14,7 +21,24 @@ const Navbar = ({ isAuth, navbarOff, vehicle, home, history, about }) => {
       setDrop(false);
     }
   };
-
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+  const handleSubmitSearch = () => {
+    router.push(`/search?keyword=${search}&page=1&limit=4&sort=asc`);
+  };
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    dispatch(logout());
+    router.push('/');
+  };
+  const handleUserClick = () => {
+    if (dropUser === false) {
+      setDropUser(true);
+    } else if (dropUser === true) {
+      setDropUser(false);
+    }
+  };
   return (
     <div>
       <div className={`${navbarOff === true ? 'displayNone' : Style.container}`}>
@@ -32,7 +56,7 @@ const Navbar = ({ isAuth, navbarOff, vehicle, home, history, about }) => {
         </div>
         <hr className={Style.line} />
         <div className={`text-nunito ${Style.tab} ${drop === false ? `${Style.hidden}` : `${Style.visible}`}`}>
-          <Link href="/home">
+          <Link href="/">
             <a>
               <p className={home ? 'text-w700' : null}>Home</p>
             </a>
@@ -54,23 +78,35 @@ const Navbar = ({ isAuth, navbarOff, vehicle, home, history, about }) => {
           </Link>
           {isAuth === true ? (
             <div className={Style.buttonContainer}>
-              <form>
+              <form onSubmit={handleSubmitSearch}>
                 <input
                   type="text"
                   name="searchVehicle"
-                  id="serchVehicle"
+                  id="searchVehicle"
                   placeholder="Search Vehicle"
-                  className={`text-nunito ${Style.searchBox}`}
+                  className={`text-nunito ${Style.searchBox} ${searchOff ? 'displayNone' : null}`}
+                  onChange={handleSearch}
                 />
               </form>
               <div>
                 <Image src="/email.svg" width="40px" height="36px" />
               </div>
-              <Link href="/user">
-                <a>
-                  <img src={user.profilePicture ? user.profilePicture : "/avatar.svg"} className={Style.photoBox} />
-                </a>
-              </Link>
+              <button className={Style.userButton} onClick={handleUserClick}>
+                <img src={user.profilePicture ? user.profilePicture : '/avatar.svg'} className={Style.photoBox} />
+                <div className={`${dropUser ? null : 'displayNone'} ${Style.userDrop}`}>
+                  <div className={Style.userContent}>
+                    <Link href="/user">
+                      <a className={`text.nunito text-24 ${Style.userList}`}>User</a>
+                    </Link>
+                    <Link href="/history">
+                      <a className={`text.nunito text-24 ${Style.userList}`}>History</a>
+                    </Link>
+                    <button className={`${Style.logout} ${Style.userList} text-nunito text-24`} onClick={handleLogout}>
+                      Logout
+                    </button>
+                  </div>
+                </div>
+              </button>
             </div>
           ) : (
             <div className={Style.buttonContainer}>
@@ -83,5 +119,4 @@ const Navbar = ({ isAuth, navbarOff, vehicle, home, history, about }) => {
     </div>
   );
 };
-
 export default Navbar;
