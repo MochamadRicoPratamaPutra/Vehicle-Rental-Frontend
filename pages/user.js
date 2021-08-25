@@ -18,16 +18,15 @@ const User = () => {
   const handleChange = (e) => {
     dispatch({ type: 'CHANGE_VALUE', payload: { [e.target.name]: e.target.value } });
   };
-  const [imgPrev, setImgPrev] = useState(null)
+  const [imgPrev, setImgPrev] = useState(null);
   const handleInputFile = (e) => {
     // console.log(e.target.file)
     // img = URL.createObjectURL(e.target.files[0])
     // console.log(img)
     e.preventDefault();
     if (e.target.files.length !== 0) {
-      setImgPrev(URL.createObjectURL(e.target.files[0]))
+      setImgPrev(URL.createObjectURL(e.target.files[0]));
     }
-    console.log(imgPrev)
     dispatch({ type: 'CHANGE_VALUE', payload: { [e.target.name]: e.target.files[0] } });
   };
   const handleSubmit = (e) => {
@@ -85,13 +84,19 @@ const User = () => {
           <p className="text-nunito text-w700 text-36">Profile</p>
           <div className={Style.top}>
             <img
-              src={user.profilePicture ? user.profilePicture : imgPrev !== null ? imgPrev : '/avatar.svg'}
+              src={imgPrev !== null ? imgPrev : user.profilePicture ? user.profilePicture : '/avatar.svg'}
               alt="profilePicture"
               className={Style.picture}
             />
             <form onSubmit={handleInputFile} className={Style.inputFile}>
               <label htmlFor="profilePicture">Change Profile Picture</label>
-              <input type="file" name="profilePicture" id="profilePicture" onChange={handleInputFile} className="displayNone" />
+              <input
+                type="file"
+                name="profilePicture"
+                id="profilePicture"
+                onChange={handleInputFile}
+                className="displayNone"
+              />
             </form>
             <p className="text-playfair text-w700 text-48">{user.name}</p>
             <p className="text-nunito text-w700 text-24 text-grey">{user.email}</p>

@@ -8,7 +8,7 @@ import AuthenticatedRoute from '../components/authenticatedRoute';
 import { useRouter } from 'next/router';
 const AddItem = () => {
   const user = useSelector((state) => state.user.profile);
-  const router = useRouter()
+  const router = useRouter();
   const [form, setForm] = useState({
     name: '',
     price: 0,
@@ -19,7 +19,7 @@ const AddItem = () => {
     city: '',
     prepayment: 0,
   });
-  let imgItem = null;
+  const [imgItem, setImgItem] = useState(null);
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -27,9 +27,7 @@ const AddItem = () => {
     });
   };
   const handleInputFile = (e) => {
-    console.log(e.target.files[0]);
-    let imgItem = URL.createObjectURL(e.target.files[0]);
-    console.log(imgItem);
+    setImgItem(URL.createObjectURL(e.target.files[0]))
     setForm({
       ...form,
       [e.target.name]: e.target.files[0],
@@ -55,7 +53,7 @@ const AddItem = () => {
     formData.append('prepayment', form.prepayment);
     e.preventDefault();
     axios
-      .post(`http://localhost:4000/vehicle`, formData, config)
+      .post(`${process.env.REACT_APP_API_URL}/vehicle`, formData, config)
       .then((res) => {
         swal('Success', 'Vehicle successfuly added to list', 'success');
       })
@@ -65,7 +63,9 @@ const AddItem = () => {
     <div>
       <Layout isAuth={user.id ? true : false} vehicle={true}>
         <div className="contentBox">
-        <button type="button" className={`text-nunito text-36 ${Style.back}`} onClick={() => router.back()}>{'<'} Add new item</button>
+          <button type="button" className={`text-nunito text-36 ${Style.back}`} onClick={() => router.back()}>
+            {'<'} Add new item
+          </button>
           <div className={Style.inputContainer}>
             <div className={Style.leftSide}>
               <input
@@ -77,11 +77,13 @@ const AddItem = () => {
                 onChange={handleChange}
               />
               <div className={Style.photoContainer}>
-                <button>
-                  <img src={`${imgItem ? imgItem : '/photo.svg'}`} alt="photo" />
-                  <p className="text-nunito text-w700 text-18 text-grey">Click to add image</p>
-                  <input type="file" name="img" onChange={handleInputFile} />
-                </button>
+                <div className={Style.imgInput}>
+                  <img src={`${imgItem ? imgItem : '/photo.svg'}`} alt="item" className={Style.imageProduct} />
+                </div>
+                <label htmlFor="img" className="text-nunito text-w700 text-18 text-grey">
+                  Click to add image
+                </label>
+                <input type="file" name="img" id="img" onChange={handleInputFile} className="displayNone" />
               </div>
             </div>
             <div className={Style.rightSide}>

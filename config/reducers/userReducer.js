@@ -47,6 +47,11 @@ const userReducer = (state = initialState, action) => {
         ...state,
         profile: {},
       };
+    case 'CHANGE_IMAGE':
+      return {
+        ...state,
+        uploadImage: action.payload,
+      };
     default:
       return state;
   }

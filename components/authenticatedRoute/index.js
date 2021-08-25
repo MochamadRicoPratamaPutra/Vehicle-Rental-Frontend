@@ -10,7 +10,6 @@ const AuthenticatedRoute = (Component = null, options = {}) => {
 
     componentDidMount() {
       const cookie = Cookies.get()
-      console.log(Object.keys(cookie).length)
       if (Object.keys(cookie).length !== 0) {
         if (options.admin === true) {
           if (cookie.role === "admin") {

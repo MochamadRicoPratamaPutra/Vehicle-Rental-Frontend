@@ -1,46 +1,82 @@
 import Style from './button.module.css';
 import Link from 'next/link';
-import { useDispatch } from 'react-redux';
-import {useRouter} from 'next/router'
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 import { login } from '../../../config/action/userAction';
 import swal from 'sweetalert';
 import { useState } from 'react';
-import { updateAmount } from '../../../config/action/reservationAction';
-const Button = ({ type, to, text, colorCode, data, maxAmount }) => {
-  const dispatch = useDispatch()
-  const router = useRouter()
-  const [amount, setAmount] = useState(0)
+import {
+  updateAmount,
+  addReservation,
+  confirmationReservation,
+  completeReservation,
+} from '../../../config/action/reservationAction';
+const Button = ({ type, to, text, colorCode, data, maxAmount, itemAmount }) => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const [amount, setAmount] = useState(itemAmount ? itemAmount : 0);
+  const amountFix = useSelector((state) => state.reservation.amount);
   const handleLogin = async () => {
     console.log(data);
     dispatch(login(data))
       .then((res) => {
-        swal("Success Login","Welcome", "success")
+        swal('Success Login', 'Welcome', 'success');
         router.push(`/${to}`);
       })
       .catch((err) => {
-        swal(`Error`,`${err}`, "error");
+        swal(`Error`, `${err}`, 'error');
       });
   };
   const handlePlusAmount = () => {
-    const newAmount = amount + 1
+    const newAmount = amount + 1;
     if (newAmount < maxAmount) {
-      setAmount(newAmount)
-      dispatch(updateAmount(newAmount))
+      setAmount(newAmount);
+      dispatch(updateAmount(newAmount));
     } else {
-      setAmount(maxAmount)
-      dispatch(updateAmount(maxAmount))
+      setAmount(maxAmount);
+      dispatch(updateAmount(maxAmount));
     }
-  }
+  };
   const handleMinusAmount = () => {
-    let newAmount = amount - 1
+    let newAmount = amount - 1;
     if (newAmount > 0) {
-      setAmount(newAmount)
-      dispatch(updateAmount(amount))
+      setAmount(newAmount);
+      dispatch(updateAmount(amount));
     } else {
-      setAmount(0)
-      dispatch(updateAmount(0))
+      setAmount(0);
+      dispatch(updateAmount(0));
     }
-  }
+  };
+  const handleReservation = () => {
+    if (amountFix === 0) {
+      swal('Error', 'Please enter your amount of vehicle you want to rent', 'error');
+    } else {
+      dispatch(addReservation(data, amountFix));
+      router.push('/reservation');
+    }
+  };
+  const handleConfirmation = () => {
+    if (!data.date) {
+      swal('Error', 'Please fill the reservation date', 'error');
+    } else {
+      dispatch(confirmationReservation(data));
+      router.push('/confirmation');
+    }
+  };
+  const handleComplete = () => {
+    if (!data.payment) {
+      swal('Error', 'Payment method has not been selected', 'error');
+    } else {
+      dispatch(completeReservation(data))
+        .then((res) => {
+          swal('Success Making Reservation', "We're waiting for your payment", 'success');
+          router.push('/');
+        })
+        .catch((err) => {
+          swal(`Error`, `${err}`, 'error');
+        });
+    }
+  };
   if (type == 'registerNav') {
     return (
       <div>
@@ -58,9 +94,7 @@ const Button = ({ type, to, text, colorCode, data, maxAmount }) => {
       <div>
         <Link href={`/${to}`}>
           <a>
-            <button className={`text-nunito text-black ${Style.button} ${Style.button1} ${Style.color2}`}>
-              Login
-            </button>
+            <button className={`text-nunito text-black ${Style.button} ${Style.button1} ${Style.color2}`}>Login</button>
           </a>
         </Link>
       </div>
@@ -96,50 +130,51 @@ const Button = ({ type, to, text, colorCode, data, maxAmount }) => {
         </Link>
       </div>
     );
-  } else if (type === 'plus') {
-    return (
-      <div>
-        <a>
-          <button
-            className={`text-nunito text-48 text-w900 ${Style.button} ${Style.button3} ${Style.color1} text-black`}
-          >
-            +
-          </button>
-        </a>
-      </div>
-    );
-  } else if (type === 'minus') {
-    return (
-      <div>
-        <a>
-          <button
-            className={`text-nunito text-48 text-w900 ${Style.button} ${Style.button3} ${Style.color4} text-black`}
-          >
-            -
-          </button>
-        </a>
-      </div>
-    );
   } else if (type === 'plusMinus') {
     return (
       <div className={Style.plusMinusBox}>
-          <button
-            className={`text-nunito text-48 text-w900 ${Style.button} ${Style.button3} ${Style.color4} text-black`}
-            onClick={handleMinusAmount}
-          >
-            -
-          </button>
-          <p className="text-48 text-w900 text-nunito">{amount}</p>
-          <button
-            className={`text-nunito text-48 text-w900 ${Style.button} ${Style.button3} ${Style.color1} text-black`}
-            onClick={handlePlusAmount}
-          >
-            +
-          </button>
+        <button
+          className={`text-nunito text-48 text-w900 ${Style.button} ${Style.button3} ${Style.color4} text-black`}
+          onClick={handleMinusAmount}
+        >
+          -
+        </button>
+        <p className="text-48 text-w900 text-nunito">{itemAmount ? itemAmount : amount}</p>
+        <button
+          className={`text-nunito text-48 text-w900 ${Style.button} ${Style.button3} ${Style.color1} text-black`}
+          onClick={handlePlusAmount}
+        >
+          +
+        </button>
       </div>
-    )
-  }
-  else if (type === 'confirmation') {
+    );
+  } else if (type === 'confirmationReservation') {
+    return (
+      <div>
+        <a>
+          <button
+            className={`text-nunito text-24 text-w900 ${Style.button} ${Style.button4} ${Style.color1} text-black`}
+            onClick={handleConfirmation}
+          >
+            {text}
+          </button>
+        </a>
+      </div>
+    );
+  } else if (type === 'completion') {
+    return (
+      <div>
+        <a>
+          <button
+            className={`text-nunito text-24 text-w900 ${Style.button} ${Style.button4} ${Style.color1} text-black`}
+            onClick={handleComplete}
+          >
+            {text}
+          </button>
+        </a>
+      </div>
+    );
+  } else if (type === 'confirmation') {
     return (
       <div>
         <a>
@@ -164,6 +199,17 @@ const Button = ({ type, to, text, colorCode, data, maxAmount }) => {
           <option value="motorbike">Motorbike</option>
           <option value="bike">Bike</option>
         </select>
+      </div>
+    );
+  } else if (type === 'addReservation') {
+    return (
+      <div>
+        <button
+          className={`text-nunito text-24 text-w900 ${Style.button} ${Style.button4} ${Style.color1} text-black`}
+          onClick={handleReservation}
+        >
+          Reservation
+        </button>
       </div>
     );
   } else if (type === 'login') {

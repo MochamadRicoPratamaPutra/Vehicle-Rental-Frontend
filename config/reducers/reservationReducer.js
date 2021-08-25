@@ -9,6 +9,18 @@ const reservationReducer = (state = initialState, action) => {
         ...state,
         amount: action.payload,
       };
+    case 'ADD_RESERVATION':
+      return {
+        ...state,
+        reservation: action.payload
+      }
+    case 'CONFIRMATION_RESERVATION':
+      return {
+        ...state,
+        date: action.payload.date,
+        day: action.payload.day,
+        total: action.payload.total,
+      }
     default:
       return state;
   }
