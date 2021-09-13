@@ -1,5 +1,5 @@
 import Layout from '../../../components/Layout';
-import Style from '../../../styles/vehicleType.module.css';
+import Style from '../../../styles/vehicletype.module.css';
 import Card from '../../../components/base/card';
 import Link from 'next/link';
 import axios from 'axios';
