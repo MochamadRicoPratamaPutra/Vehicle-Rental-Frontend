@@ -12,7 +12,7 @@ const userReducer = (state = initialState, action) => {
     case 'LOGIN_USER_ERROR':
       return {
         ...state,
-        error: action.payload,
+        // error: action.payload,
       };
     case 'SIGNUP_USER':
       return {
