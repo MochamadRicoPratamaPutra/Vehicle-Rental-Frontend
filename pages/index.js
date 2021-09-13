@@ -48,29 +48,6 @@ export default function Home() {
                 <input type="submit" />
               </form>
             </div>
-            <div className={`text-nunito ${Style.choiceBox}`}>
-              <form>
-                <select id="prepayment" name="prepayment">
-                  <option disabled selected value>
-                    Prepayment
-                  </option>
-                  <option value="1">Yes</option>
-                  <option value="2">No</option>
-                </select>
-                <input type="submit" />
-              </form>
-              <form>
-                <select id="date" name="date">
-                  <option disabled selected value>
-                    Date
-                  </option>
-                  <option value="car">Car</option>
-                  <option value="bike">Bike</option>
-                  <option value="motorcycle">Motorcycle</option>
-                </select>
-                <input type="submit" />
-              </form>
-            </div>
             <Button />
           </div>
           <hr className={Style.resLine} />

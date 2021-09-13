@@ -21,6 +21,9 @@
   background: none;
   margin-right: 30px;
 }
+.Button button:disabled {
+  background: grey;
+}
 .color3 {
   background: rgba(57, 57, 57, 1);
 }

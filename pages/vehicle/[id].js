@@ -219,7 +219,14 @@ const Vehicle = ({ vehicle }) => {
     </div>
   );
 };
-export const getServerSideProps = async (context) => {
+export const getStaticPaths = async() =>{
+  const paths = [{ params: { id: '6' } }, { params: { id: '7' } }, { params: { id: '8' } }]
+  return {
+    paths: paths,
+    fallback: true
+  }
+}
+export const getStaticProps = async (context) => {
   const id = context.params.id;
   const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/vehicle/${id}`);
   return {

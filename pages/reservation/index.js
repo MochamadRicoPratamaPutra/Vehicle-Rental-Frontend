@@ -10,10 +10,9 @@ const Vehicle = () => {
   const { reservation, amount } = useSelector((state) => state.reservation);
   const [date, setDate] = useState(null);
   const [day, setDay] = useState(1);
-  console.log(Object.keys(reservation).length);
   useEffect(() => {
     if (Object.keys(reservation).length === 0) {
-      router.push('/vehicle-type');
+      router.push('/login');
     }
   }, []);
   var today = new Date();

@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../../config/action/userAction';
+import swal from 'sweetalert';
 const Navbar = ({ isAuth, navbarOff, vehicle, home, history, about, searchOff }) => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -24,8 +25,13 @@ const Navbar = ({ isAuth, navbarOff, vehicle, home, history, about, searchOff })
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
-  const handleSubmitSearch = () => {
-    router.push(`/search?keyword=${search}&page=1&limit=4&sort=asc`);
+  const handleSubmitSearch = (e) => {
+    e.preventDefault()
+    if (search !== '') {
+      router.push(`/search?keyword=${search}&page=1&limit=4&sort=asc`);
+    } else {
+      swal('Error', 'Please insert a word before clicking the button', 'error')
+    }
   };
   const handleLogout = () => {
     localStorage.removeItem('token');

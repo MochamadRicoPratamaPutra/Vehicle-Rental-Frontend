@@ -79,7 +79,7 @@ const User = () => {
   };
   return (
     <div>
-      <Layout>
+      <Layout isAuth={user.id ? true : false} vehicle={false}>
         <div className="contentBox">
           <p className="text-nunito text-w700 text-36">Profile</p>
           <div className={Style.top}>

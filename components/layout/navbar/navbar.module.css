@@ -7,13 +7,15 @@
 .tab {
   display: flex;
   align-items: center;
+  white-space: nowrap;
 }
 .buttonContainer {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   width: 100%;
+  gap: 30px;
 }
 .tab p {
   margin-right: 30px;

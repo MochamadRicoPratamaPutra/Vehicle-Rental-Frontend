@@ -31,7 +31,7 @@ export const login = (data) => async (dispatch) => {
 export const signup = (data) => async (dispatch) => {
   return new Promise((resolve, reject) => {
     return axios
-      .post(`${process.env.REACT_APP_API_URL}v1/users/register`, data)
+      .post(`${process.env.REACT_APP_API_URL}/users/register`, data)
       .then((res) => {
         const result = res.data.data;
         // console.log(result.role);
@@ -68,7 +68,7 @@ export const renewPass = (data) => async (dispatch) => {
       password: data.password,
     };
     return axios
-      .put(`${process.env.REACT_APP_API_URL}v1/users/forgot/${data.email}`, dataPass)
+      .put(`${process.env.REACT_APP_API_URL}/users/forgot/${data.email}`, dataPass)
       .then((res) => {
         dispatch({ type: 'RENEW_PASS', payload: { email: data.email, password: data.password } });
         resolve(res);
@@ -95,7 +95,7 @@ export const editProfile = (data) => (dispatch) => {
     formData.append('profilePicture', data.profilePicture[0], data.profilePicture[0].name);
     // console.log(formData)
     return axios
-      .put(`${process.env.REACT_APP_API_URL}v1/users/${data.id}`, formData, config)
+      .put(`${process.env.REACT_APP_API_URL}/users/${data.id}`, formData, config)
       .then((res) => {
         const result = res.data.data;
         // console.log(result.role)

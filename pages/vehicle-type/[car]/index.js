@@ -57,7 +57,6 @@ const VehicleType = ({ product, next, prev, str, sort, page }) => {
     </div>
   );
 };
-
 export const getServerSideProps = async (context) => {
   try {
     const page = context.query.page;

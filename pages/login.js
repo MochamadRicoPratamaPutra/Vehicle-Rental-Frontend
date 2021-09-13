@@ -62,9 +62,9 @@ const Login = () => {
               <div>
                 <Button type="login" text="Login" data={form} to="/" />
               </div>
-              <div>
+              {/* <div>
                 <Button type="confirmation" text="with google" />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

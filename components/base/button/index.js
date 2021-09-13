@@ -2,7 +2,7 @@ import Style from './button.module.css';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-import { login } from '../../../config/action/userAction';
+import { login, signup } from '../../../config/action/userAction';
 import swal from 'sweetalert';
 import { useState } from 'react';
 import {
@@ -11,13 +11,13 @@ import {
   confirmationReservation,
   completeReservation,
 } from '../../../config/action/reservationAction';
-const Button = ({ type, to, text, colorCode, data, maxAmount, itemAmount }) => {
+import axios from 'axios';
+const Button = ({ type, to, text, colorCode, data, maxAmount, itemAmount, id, register, done }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [amount, setAmount] = useState(itemAmount ? itemAmount : 0);
   const amountFix = useSelector((state) => state.reservation.amount);
   const handleLogin = async () => {
-    console.log(data);
     dispatch(login(data))
       .then((res) => {
         swal('Success Login', 'Welcome', 'success');
@@ -27,6 +27,15 @@ const Button = ({ type, to, text, colorCode, data, maxAmount, itemAmount }) => {
         swal(`Error`, `${err}`, 'error');
       });
   };
+  const handleRegister = async () => {
+    dispatch(signup(data))
+      .then((res) => {
+        swal('Success Login', 'Please, check your email to activating your account', 'success');
+      })
+      .catch((err) => {
+        swal(`Error`, `${err}`, 'error');
+      });
+  }
   const handlePlusAmount = () => {
     const newAmount = amount + 1;
     if (newAmount < maxAmount) {
@@ -76,6 +85,22 @@ const Button = ({ type, to, text, colorCode, data, maxAmount, itemAmount }) => {
           swal(`Error`, `${err}`, 'error');
         });
     }
+  };
+  const handleApprove = () => {
+    const config = {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    };
+    console.log(id)
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/reservation/payment/${id}`, config)
+      .then(() => {
+        swal('Payment Approved', 'success', 'success');
+      })
+      .catch((err) => {
+        swal(`Error`, `${err}`, 'error');
+      });
   };
   if (type == 'registerNav') {
     return (
@@ -174,6 +199,20 @@ const Button = ({ type, to, text, colorCode, data, maxAmount, itemAmount }) => {
         </a>
       </div>
     );
+  } else if (type === 'approve') {
+    return (
+      <div>
+        <a>
+          <button
+            className={`text-nunito text-24 text-w900 ${Style.button} ${Style.button4} ${Style.color1} text-black`}
+            onClick={handleApprove}
+            disabled={done !== 'waiting for payment' ? true : false}
+          >
+            Approve Payment
+          </button>
+        </a>
+      </div>
+    );
   } else if (type === 'confirmation') {
     return (
       <div>
@@ -218,9 +257,9 @@ const Button = ({ type, to, text, colorCode, data, maxAmount, itemAmount }) => {
         <a>
           <button
             className={`text-nunito text-24 text-w900 ${Style.button} ${Style.button4} ${Style.color1} text-black`}
-            onClick={handleLogin}
+            onClick={register ? handleRegister : handleLogin}
           >
-            Login
+            {register ? 'Register' : 'Login'}
           </button>
         </a>
       </div>

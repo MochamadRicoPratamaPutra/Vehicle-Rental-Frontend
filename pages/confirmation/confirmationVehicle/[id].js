@@ -1,26 +1,15 @@
-import Layout from '../../components/Layout';
-import Style from '../../styles/confirmation.module.css';
-import Button from '../../components/base/button';
+import Layout from '../../../components/Layout';
+import Style from '../../../styles/confirmation.module.css';
+import Button from '../../../components/base/button';
 import { useSelector } from 'react-redux';
-import AuthenticatedRoute from '../../components/authenticatedRoute';
+import AuthenticatedRoute from '../../../components/authenticatedRoute';
 import { useRouter } from 'next/router';
-import Randomstring from 'randomstring';
-import { useState, useEffect } from 'react';
-const Confirmation = () => {
+import axios from 'axios';
+const Confirmation = ({ reservation }) => {
   const user = useSelector((state) => state.user.profile);
   const router = useRouter();
-  const { reservation, amount, date, day, total } = useSelector((state) => state.reservation);
-  const [payment, setPayment] = useState('');
-  const handlePayment = (e) => {
-    setPayment(e.target.value);
-  };
-  const [code, setCode] = useState(null);
-  useEffect(() => {
-    if (Object.keys(reservation).length === 0) {
-      router.push('/login');
-    }
-    setCode(Randomstring.generate(7));
-  }, []);
+  const { id } = router.query;
+  const date = reservation.reservationDate;
   return (
     <div>
       <Layout isAuth={user.id ? true : false} vehicle={true}>
@@ -34,14 +23,14 @@ const Confirmation = () => {
             </div>
             <div className={Style.right}>
               <div>
-                <p className="text-playfair text-48 text-dark">{reservation.name}</p>
+                <p className="text-playfair text-48 text-dark">{reservation.vehicleName}</p>
                 <p className="text-playfair text-36 text-dark">{reservation.city}</p>
               </div>
               <p className="text-nunito text-32 text-grey text-w700">
                 {reservation.prepayment === 0 ? 'No Prepayment' : 'Can Prepayment'}
               </p>
               <div>
-                <p className="text-playfair text-36 text-dark text-w700">{code}</p>
+                <p className="text-playfair text-36 text-dark text-w700">{reservation.bookingCode}</p>
                 <button className={`${Style.copy} text-nunito text-w700 text-24`}>Copy booking code</button>
               </div>
             </div>
@@ -49,7 +38,7 @@ const Confirmation = () => {
           <div className={Style.detail}>
             <div className={`${Style.box} ${Style.boxLeft}`}>
               <p className="text-nunito text-w700 text-24 text-black">
-                quantity: {amount} {reservation.type}
+                quantity: {reservation.quantity} {reservation.type}
               </p>
             </div>
             <div className={`${Style.box} ${Style.boxRight} ${Style.date}`}>
@@ -62,50 +51,56 @@ const Confirmation = () => {
               <div>
                 <p className="text-nunito text-w900 text-24 text-black">Order details: </p>
                 <p className="text-nunito text-w400 text-24 text-black">
-                  {amount} {reservation.type}: Rp. {reservation.price * amount}
+                  1 {reservation.type}: Rp. {reservation.price}
                 </p>
-                <p className="text-nunito text-w400 text-24 text-black">number of days borrowed: {day} day</p>
+                <p className="text-nunito text-w400 text-24 text-black">
+                  1 {reservation.type}: Rp. {reservation.price}
+                </p>
               </div>
-              <p className="text-nunito text-w700 text-24 text-black">Total: {total}</p>
+              <p className="text-nunito text-w700 text-24 text-black">Total: {reservation.totalPayment}</p>
             </div>
             <div className={Style.box}>
               <p className="text-nunito text-w900 text-24 text-black">Identity: </p>
               <p className="text-nunito text-w400 text-24 text-black">
-                {user.name} ({user.phone})
+                {reservation.userName} ({reservation.phone})
               </p>
-              <p className="text-nunito text-w400 text-24 text-black">{user.email}</p>
+              <p className="text-nunito text-w400 text-24 text-black">{reservation.email}</p>
             </div>
           </div>
           <div className={Style.payment}>
             <p className="text-nunito text-w700 text-24">Payment code: </p>
             <div className={Style.box2}>
-              <p className="text-playfair text-w-700 text-24">{code}</p>
+              <p className="text-playfair text-w-700 text-24">{reservation.paymentCode}</p>
               <button className={`text-nunito text-w700 text-24 text-yellow ${Style.buttonCopy}`}>copy</button>
             </div>
-            <form>
-              <select
-                name="paymentMethod"
-                id="paymentMethod"
-                className="text-nunito text-w700 text-24"
-                onChange={handlePayment}
-              >
-                <option disabled selected value>
-                  Select payment methods
-                </option>
-                <option value="cash">cash</option>
-                <option value="tranfer">transfer</option>
-              </select>
-            </form>
+            <div className={Style.box2}>
+              <p className="text-24 text-nunito text-grey">Payment Method: {reservation.paymentMethod}</p>
+            </div>
           </div>
-          <Button
-            type="completion"
-            text={`Pay now: Rp. ${total}`}
-            data={{ reservation, amount, date, day, total, payment, code, user }}
-          />
+          <Button type="approve" id={reservation.reservationId} done={reservation.status}/>
         </div>
       </Layout>
     </div>
   );
 };
-
-export default AuthenticatedRoute(Confirmation, { pathAfterFailure: '/login', admin: false });
+export const getServerSideProps = async (context) => {
+  let cookie = '';
+  if (context.req) {
+    cookie = context.req.headers.cookie;
+  }
+  const { id } = context.params;
+  const result = await axios.get(`${process.env.REACT_APP_API_URL}/reservation/${id}`, {
+    withCredentials: true,
+    headers: {
+      cookie: cookie,
+    },
+  });
+  const reservation = result.data.data[0];
+  console.log(reservation);
+  return {
+    props: {
+      reservation: reservation,
+    },
+  };
+};
+export default AuthenticatedRoute(Confirmation, { pathAfterFailure: '/login', admin: true });
