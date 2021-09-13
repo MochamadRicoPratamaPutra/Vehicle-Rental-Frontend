@@ -11,7 +11,7 @@ const ForgotPassword = () => {
           </div>
           <div className={Style.content}>
             <div className={Style.forgotContent}>
-              <p className="text-playfair text-w700 text-64 text-white">Don't worry, we got your back!</p>
+              <p className="text-playfair text-w700 text-64 text-white">Don&apos;t worry, we got your back!</p>
               <div className={Style.button}>
                 <input
                   type="text"

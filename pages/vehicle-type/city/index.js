@@ -21,7 +21,7 @@ const VehicleType = ({ jakarta, bandung, malang, yogyakarta, kalimantan }) => {
           </div>
           <div className={Style.cardTitle}>
             {bandung.map((item) => (
-              <div>
+              <div key={item.id}>
                 <Card type="product" title={item.name} city={item.city} img={item.img} id={item.id} />
               </div>
             ))}
@@ -36,7 +36,7 @@ const VehicleType = ({ jakarta, bandung, malang, yogyakarta, kalimantan }) => {
           </div>
           <div className={Style.cardTitle}>
             {yogyakarta.map((item) => (
-              <div>
+              <div key={item.id}>
                 <Card type="product" title={item.name} city={item.city} img={item.img} id={item.id} />
               </div>
             ))}
@@ -51,7 +51,7 @@ const VehicleType = ({ jakarta, bandung, malang, yogyakarta, kalimantan }) => {
           </div>
           <div className={Style.cardTitle}>
             {jakarta.map((item) => (
-              <div>
+              <div key={item.id}>
                 <Card type="product" title={item.name} city={item.city} img={item.img} id={item.id} />
               </div>
             ))}
@@ -66,7 +66,7 @@ const VehicleType = ({ jakarta, bandung, malang, yogyakarta, kalimantan }) => {
           </div>
           <div className={Style.cardTitle}>
             {kalimantan.map((item) => (
-              <div>
+              <div key={item.id}>
                 <Card type="product" title={item.name} city={item.city} img={item.img} id={item.id} />
               </div>
             ))}
@@ -81,7 +81,7 @@ const VehicleType = ({ jakarta, bandung, malang, yogyakarta, kalimantan }) => {
           </div>
           <div className={Style.cardTitle}>
             {malang.map((item) => (
-              <div>
+              <div key={item.id}>
                 <Card type="product" title={item.name} city={item.city} img={item.img} id={item.id} />
               </div>
             ))}

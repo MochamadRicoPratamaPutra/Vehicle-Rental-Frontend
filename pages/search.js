@@ -67,7 +67,7 @@ const Search = () => {
             } ${keyword ? null : "displayNone"}`}
           >
             {result.map((item) => (
-              <div>
+              <div key={item.id}>
                 <Card
                   type="product"
                   title={item.name}

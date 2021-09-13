@@ -15,7 +15,7 @@ const VehicleType = ({ product, next, prev, str, sort, page }) => {
           </div>
           <div className={Style.cardTitle}>
             {product.map((item) => (
-              <div>
+              <div key={item.id}>
                 <Card type="product" title={item.name} city={item.city} img={item.img} id={item.id} />
               </div>
             ))}

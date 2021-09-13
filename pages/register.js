@@ -32,8 +32,8 @@ const Register = () => {
           </div>
           <div className={Style.content}>
             <div className={Style.leftSide}>
-              <p className="text-playfair text-w700 text-64 text-white">Let's Explore the World</p>
-              <p className="text-nunito text-w700 text-24 text-white">Don't have an account?</p>
+              <p className="text-playfair text-w700 text-64 text-white">Let&apos;s Explore the World</p>
+              <p className="text-nunito text-w700 text-24 text-white">Don&apos;t have an account?</p>
               <Button type="confirmation" text="Login" />
             </div>
             <div className={Style.rightSide}>

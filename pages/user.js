@@ -112,13 +112,13 @@ const User = () => {
                 value="male"
                 // defaultValue={user.gender === 'male' ? true : false}
               />
-              <label className="text-nunito text-24" for="gender">
+              <label className="text-nunito text-24" htmlFor="gender">
                 male
               </label>
             </div>
             <div>
               <input type="radio" id="gender" name="gender" value="female" />
-              <label className="text-nunito text-24" for="gender">
+              <label className="text-nunito text-24" htmlFor="gender">
                 female
               </label>
             </div>

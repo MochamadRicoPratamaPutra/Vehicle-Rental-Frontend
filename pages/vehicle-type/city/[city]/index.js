@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useSelector } from 'react-redux';
 const VehicleType = ({product, next, prev, str, sort, page, limit}) => {
   const user = useSelector((state) => state.user.profile);
+  console.log(product)
   const router = useRouter();
   return (
     <div>
@@ -17,7 +18,7 @@ const VehicleType = ({product, next, prev, str, sort, page, limit}) => {
           </div>
           <div className={`${Style.cardTitle} ${Style.wrap} ${parseInt(product.length) === parseInt(limit) ? null : Style.lastPage}`}>
             {product.map((item) => (
-              <div>
+              <div key={item.id}>
                 <Card type="product" title={item.name} city={item.city} img={item.img} id={item.id} margining={parseInt(product.length) === parseInt(limit) ? null : true}/>
               </div>
             ))}

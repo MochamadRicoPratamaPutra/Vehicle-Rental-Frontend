@@ -34,7 +34,7 @@ const VehicleType = ({ bike, car, motorcycle }) => {
           </div>
           <div className={Style.cardTitle}>
             {car.map((item) => (
-              <div>
+              <div key={item.id}>
                 <Card type="product" title={item.name} city={item.city} img={item.img} id={item.id} />
               </div>
             ))}
@@ -49,7 +49,7 @@ const VehicleType = ({ bike, car, motorcycle }) => {
           </div>
           <div className={Style.cardTitle}>
             {motorcycle.map((item) => (
-              <div>
+              <div key={item.id}>
                 <Card type="product" title={item.name} city={item.city} img={item.img} id={item.id} />
               </div>
             ))}
@@ -64,7 +64,7 @@ const VehicleType = ({ bike, car, motorcycle }) => {
           </div>
           <div className={Style.cardTitle}>
             {bike.map((item) => (
-              <div>
+              <div key={item.id}>
                 <Card type="product" title={item.name} city={item.city} img={item.img} id={item.id} />
               </div>
             ))}
