@@ -14,54 +14,54 @@ const Footer = () => {
             <p className="text-grey">©2020 Vehicle Rental Center. All rights reserved</p>
           </div>
           <div className={Style.content}>
-            <Link href="http://localhost:3000/vehicle-type/city">
+            <Link href="/vehicle-type/city">
               <a>
                 <h1 className="text-mulish">Destination</h1>
               </a>
             </Link>
-            <Link href="http://localhost:3000/vehicle-type/city/bandung?page=1&limit=4&sort=asc">
+            <Link href="/vehicle-type/city/bandung?page=1&limit=4&sort=asc">
               <a>
                 <p className="text-grey">Bandung</p>
               </a>
             </Link>
-            <Link href="http://localhost:3000/vehicle-type/city/yogyakarta?page=1&limit=4&sort=asc">
+            <Link href="/vehicle-type/city/yogyakarta?page=1&limit=4&sort=asc">
               <a>
                 <p className="text-grey">Yogyakarta</p>
               </a>
             </Link>
-            <Link href="http://localhost:3000/vehicle-type/city/jakarta?page=1&limit=4&sort=asc">
+            <Link href="/vehicle-type/city/jakarta?page=1&limit=4&sort=asc">
               <a>
                 <p className="text-grey">Jakarta</p>
               </a>
             </Link>
-            <Link href="http://localhost:3000/vehicle-type/city/kalimantan?page=1&limit=4&sort=asc">
+            <Link href="/vehicle-type/city/kalimantan?page=1&limit=4&sort=asc">
               <a>
                 <p className="text-grey">Kalimantan</p>
               </a>
             </Link>
-            <Link href="http://localhost:3000/vehicle-type/city/malang?page=1&limit=4&sort=asc">
+            <Link href="/vehicle-type/city/malang?page=1&limit=4&sort=asc">
               <a>
                 <p className="text-grey">Malang</p>
               </a>
             </Link>
           </div>
           <div className={Style.content}>
-            <Link href="http://localhost:3000/vehicle-type">
+            <Link href="/vehicle-type">
               <a>
                 <h1 className="text-mulish">Vehicle</h1>
               </a>
             </Link>
-            <Link href="http://localhost:3000/vehicle-type/bike?page=1&limit=4&sort=asc">
+            <Link href="/vehicle-type/bike?page=1&limit=4&sort=asc">
               <a>
                 <p className="text-grey">Bike</p>
               </a>
             </Link>
-            <Link href="http://localhost:3000/vehicle-type/car?page=1&limit=4&sort=asc">
+            <Link href="/vehicle-type/car?page=1&limit=4&sort=asc">
               <a>
                 <p className="text-grey">Cars</p>
               </a>
             </Link>
-            <Link href="http://localhost:3000/vehicle-type/motorcycle?page=1&limit=4&sort=asc">
+            <Link href="/vehicle-type/motorcycle?page=1&limit=4&sort=asc">
               <a>
                 <p className="text-grey">Motorbike</p>
               </a>

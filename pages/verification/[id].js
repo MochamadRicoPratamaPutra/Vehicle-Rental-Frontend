@@ -37,7 +37,7 @@ export const getServerSideProps = async (context) => {
   const { id } = context.params;
   console.log(id);
   try {
-    await axios.get(`http://localhost:4000/users/verification/${id}`);
+    await axios.get(`${process.env.REACT_APP_BASE_URL}/users/verification/${id}`);
     return {
       props: {
         validate: true,
