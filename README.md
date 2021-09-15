@@ -1,6 +1,6 @@
 <h1 align='center'>Vehicle Rental</h1>
 <p align="center">
-  <image align="center" width="200" src='./src/assets/logo.png' />
+  <image align="center" width="200" src='./public/Logo.svg' />
   </p>
   <p align="center">
     <a href="https://vehicle-rental-rico.vercel.app/">View Demo</a>
