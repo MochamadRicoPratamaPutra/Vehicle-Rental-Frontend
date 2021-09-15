@@ -9,7 +9,7 @@ const login = (req, res) => {
     };
     console.log(data)
     axios
-      .post(`${process.env.REACT_APP_API_URL}/login`, data)
+      .post(`${process.env.REACT_APP_API_URL}/users/login`, data)
       .then((response) => {
         console.log(response, ' response login');
         const result = response.data.data;
