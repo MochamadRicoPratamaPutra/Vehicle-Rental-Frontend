@@ -8,7 +8,7 @@ const login = (req, res) => {
       password,
     };
     axios
-      .post(`${process.env.REACT_APP_API_URL}/login`, data)
+      .post(`${process.env.REACT_APP_API_URL}/api/login`, data)
       .then((response) => {
         console.log(response, ' response login');
         const result = response.data.data;
