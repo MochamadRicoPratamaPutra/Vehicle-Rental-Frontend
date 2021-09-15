@@ -16,7 +16,6 @@ const login = (req, res) => {
         res.setHeader('Access-Control-Allow-Headers', '*');
         res.setHeader('Access-Control-Allow-Credentials', true);
         res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-        setMultipleCookies(res);
         res.setHeader('Set-Cookie', [
           cookie.serialize('token', result.token, {
             httpOnly: true,
