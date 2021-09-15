@@ -1,5 +1,5 @@
 import axios from 'axios';
-import cookie from 'cookie';
+import cookie from 'cookies';
 const login = (req, res) => {
   if (req.method === 'POST') {
     const { email, password } = req.body;
