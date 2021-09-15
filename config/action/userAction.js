@@ -6,7 +6,7 @@ export const login = (data) => async (dispatch) => {
     // console.log(dataBody);
     // console.log(process.env.REACT_APP_API_URL)
     return axios
-      .post(`${process.env.REACT_APP_API_URL}/users/login`, dataBody, { withCredentials: true })
+      .post(`${process.env.REACT_APP_BASE_URL}/users/login`, dataBody, { withCredentials: true })
       .then((res) => {
         const result = res.data.data;
         // console.log(result.role);
