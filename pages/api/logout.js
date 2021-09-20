@@ -3,7 +3,7 @@ import axios from 'axios';
 const logout = (req, res) => {
   if (req.method === 'GET') {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/users/login`, data)
+      .get(`${process.env.REACT_APP_API_URL}/users/logout`)
       .then(() => {
         res.setHeader('Access-Control-Allow-Headers', '*');
         res.setHeader('Access-Control-Allow-Credentials', true);
@@ -13,21 +13,21 @@ const logout = (req, res) => {
             // httpOnly: true,
             // secure: true,
             // sameSite: 'strict',
-            maxAge: new Date(0),
+            maxAge: 0,
             path: '/',
           }),
           cookie.serialize('id', result.id, {
             // httpOnly: true,
             // secure: true,
             // sameSite: 'strict',
-            maxAge: new Date(0),
+            maxAge: 0,
             path: '/',
           }),
           cookie.serialize('role', result.role, {
             // httpOnly: true,
             // secure: true,
             // sameSite: 'strict',
-            maxAge: new Date(0),
+            maxAge: 0,
             path: '/',
           }),
         ]);

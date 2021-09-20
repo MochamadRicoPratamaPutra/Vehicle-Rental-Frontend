@@ -110,7 +110,7 @@ export const editProfile = (data) => (dispatch) => {
   });
 };
 export const logout = () => (dispatch) => {
-  axios.get(`${process.env.REACT_APP_API_URL}/users/logout`)
+  axios.get(`${process.env.REACT_APP_BASE_URL}/api/logout`)
   localStorage.removeItem('token')
   dispatch({ type: 'LOGOUT', payload: '' });
 };
