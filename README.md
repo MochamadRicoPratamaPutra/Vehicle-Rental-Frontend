@@ -1,6 +1,7 @@
-<h1 align='center'>Vehicle Rental</h1>
+
 <p align="center">
   <image align="center" width="200" src='./public/Logo.svg' />
+  <h1 align='center'>Vehicle Rental</h1>
   </p>
   <p align="center">
     <a href="https://vehicle-rental-rico.vercel.app/">View Demo</a>
@@ -17,15 +18,14 @@
   * [Screenshot](#screenshots)
   * [Built With](#built-with)
 * [Getting Started](#getting-started)
-  * [Installation](#installation)
-* [Related Project](#related-project-backend)
+* [Related Project](#related-project)
 * [Acknowledgements](#acknowledgements)
 * [Contact](#contact)
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-SkyTalk, web aplication for chatting based from telegram and whatsapp.
+Vehicle Rental is a web for renting vehicle like car, bike, and motorcycle, based on 5 big city in Indonesia.
 
 ## Screenshots
 <p align="center">
@@ -48,7 +48,7 @@ SkyTalk, web aplication for chatting based from telegram and whatsapp.
 
 ## Getting Started
 
-1. Download this Project or you can type `git clone https://github.com/MochamadRicoPratamaPutra/Sky-Talk-Frontend.git`
+1. Download this Project or you can type `git clone https://github.com/MochamadRicoPratamaPutra/Vehicle-Rental-Frontend.git`
 2. Open app's directory in CMD or Terminal
 3. Type `npm install` or `yarn install`
 4. Add .env.local file at root folder project
