@@ -46,7 +46,7 @@ const User = () => {
     formData.append('gender', user.gender);
     e.preventDefault();
     axios
-      .put(`${process.env.REACT_APP_BASE_URL}/users/${user.id}`, formData, config)
+      .put(`${process.env.REACT_APP_API_URL}/users/${user.id}`, formData, config)
       .then((res) => {
         swal('Success', 'Vehicle successfuly update data', 'success');
       })
