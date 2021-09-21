@@ -48,7 +48,7 @@ const User = () => {
     axios
       .put(`${process.env.REACT_APP_API_URL}/users/${user.id}`, formData, config)
       .then((res) => {
-        swal('Success', 'Vehicle successfuly update data', 'success');
+        swal('Success', 'Successfuly edit your profile', 'success');
       })
       .catch((err) => swal('Error', 'error', 'error'));
   };
@@ -66,7 +66,7 @@ const User = () => {
             Authorization: 'Bearer ' + localStorage.getItem('token'),
           },
         };
-        axios.delete(`http://localhost:4000/users/${user.id}`, config);
+        axios.delete(`${process.env.REACT_APP_API_URL}/users/${user.id}`, config);
         swal('Your account has been deleted, we will miss you', {
           icon: 'success',
         });
