@@ -83,7 +83,7 @@ export const getServerSideProps = async (context) => {
   if (context.req) {
     cookie = context.req.headers.cookie;
   }
-  cookieCheck = Cookies.get()
+  const cookieCheck = Cookies.get()
   let result;
   if (cookieCheck.role === 'user') {
     result = await axios.get(`${process.env.REACT_APP_API_URL}/reservation/user/${cookie.role}`, {
