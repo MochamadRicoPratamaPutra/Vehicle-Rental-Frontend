@@ -34,7 +34,11 @@ const Register = () => {
             <div className={Style.leftSide}>
               <p className="text-playfair text-w700 text-64 text-white">Let&apos;s Explore the World</p>
               <p className="text-nunito text-w700 text-24 text-white">Don&apos;t have an account?</p>
-              <Button type="confirmation" text="Login" />
+              <Link href="/login">
+                <a>
+                  <Button type="confirmation" text="Login" to="/login" />
+                </a>
+              </Link>
             </div>
             <div className={Style.rightSide}>
               <input
@@ -60,9 +64,6 @@ const Register = () => {
               />
               <div>
                 <Button type="login" text="Register" register={true} data={form} />
-              </div>
-              <div>
-                <Button type="confirmation" text="with google" />
               </div>
             </div>
           </div>
