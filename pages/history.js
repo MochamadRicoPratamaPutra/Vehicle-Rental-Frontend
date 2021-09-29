@@ -10,140 +10,69 @@ const History = ({ reservation }) => {
   return (
     <div>
       <Layout isAuth={user.id ? true : false} history={true}>
-        {user.role === 'admin' ? (
-          <>
-            <div className={Style.historyContainer}>
-              <div className={Style.left}>
-                <div className={Style.searchChoice}>
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="Search history"
-                      className={`text-nunito text-24 text-grey ${Style.inputBox}`}
-                    />
-                  </div>
-                  <div>
-                    <select name="filter" id="filter" className={`text-nunito text-24 text-grey ${Style.filter}`}>
-                      <option value disabled>
-                        filter
-                      </option>
-                      <option value="type">Type</option>
-                      <option value="date">Date Added</option>
-                      <option value="name">Name</option>
-                      <option value="favoriteProduct">Favorite Product</option>
-                    </select>
-                  </div>
-                </div>
-                <div>
-                  <h1 className="text-nunito text-36 text-black text-w700">Payment</h1>
-                </div>
-                <h1 className="text-nunito text-36 text-black text-w700">Vehicle</h1>
-                <div className={Style.cardContainer}>
-                  {reservation.map((item) => (
-                    <>
-                      <Link href={`/confirmation/confirmationVehicle/${item.reservationId}`}>
-                        <a>
-                          <div className={Style.card}>
-                            <img src={item.img} alt="img" className={Style.img} />
-                            <div className={Style.cardDesc}>
-                              <div>
-                                <p className="text-nunito text-24 text-w700">{item.vehicleName}</p>
-                                <p className="text-nuntio text-18">{item.reservationDate}</p>
-                              </div>
-                              <div>
-                                <p className="text-nunito text-w700 text-black">Prepayment: Rp. {item.totalPayment}</p>
-                                <p className="text-nunito text-24 text-green">
-                                  {item.status === 'waiting for payment'
-                                    ? 'Not yet renting'
-                                    : item.status === 'active'
-                                    ? 'currently renting'
-                                    : 'Has been returned'}
-                                </p>
-                              </div>
-                            </div>
+        <div className={Style.historyContainer}>
+          <div className={Style.left}>
+            <div className={Style.searchChoice}>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Search history"
+                  className={`text-nunito text-24 text-grey ${Style.inputBox}`}
+                />
+              </div>
+              <div>
+                <select name="filter" id="filter" className={`text-nunito text-24 text-grey ${Style.filter}`}>
+                  <option value disabled>
+                    filter
+                  </option>
+                  <option value="type">Type</option>
+                  <option value="date">Date Added</option>
+                  <option value="name">Name</option>
+                  <option value="favoriteProduct">Favorite Product</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <h1 className="text-nunito text-36 text-black text-w700">Payment</h1>
+            </div>
+            <h1 className="text-nunito text-36 text-black text-w700">Vehicle</h1>
+            <div className={Style.cardContainer}>
+              {reservation.map((item) => (
+                <>
+                  <Link href={`/confirmation/confirmationVehicle/${item.reservationId}`}>
+                    <a>
+                      <div className={Style.card}>
+                        <img src={item.img} alt="img" className={Style.img} />
+                        <div className={Style.cardDesc}>
+                          <div>
+                            <p className="text-nunito text-24 text-w700">{item.vehicleName}</p>
+                            <p className="text-nuntio text-18">{item.reservationDate}</p>
                           </div>
-                        </a>
-                      </Link>
-                    </>
-                  ))}
-                </div>
-              </div>
-              <div className={Style.arrivalBox}>
-                <p className="text-playfair text-w900 text-24">New Arrival</p>
-                <Card type="town" title="Merapi" city="yogyakarta" />
-                <Card type="town" title="Monas" city="jakarta" />
-                <p>view more</p>
-              </div>
-            </div>
-          </>
-        ) : (
-          <>
-            <div className={Style.historyContainer}>
-              <div className={Style.left}>
-                <div className={Style.searchChoice}>
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="Search history"
-                      className={`text-nunito text-24 text-grey ${Style.inputBox}`}
-                    />
-                  </div>
-                  <div>
-                    <select name="filter" id="filter" className={`text-nunito text-24 text-grey ${Style.filter}`}>
-                      <option value disabled>
-                        filter
-                      </option>
-                      <option value="type">Type</option>
-                      <option value="date">Date Added</option>
-                      <option value="name">Name</option>
-                      <option value="favoriteProduct">Favorite Product</option>
-                    </select>
-                  </div>
-                </div>
-                <div>
-                  <h1 className="text-nunito text-36 text-black text-w700">Payment</h1>
-                  <div className={Style.listPayment}>
-                    <div className={Style.payment}>
-                      <p className="text-nunito text-w700 text-24 text-black">Please finish your payment for vespa</p>
-                      <input type="checkbox" className={Style.check} />
-                    </div>
-                    <div className={Style.payment}>
-                      <p className="text-nunito text-w700 text-24 text-black">Please finish your payment for vespa</p>
-                      <input type="checkbox" className={Style.check} />
-                    </div>
-                    <div className={Style.payment}>
-                      <p className="text-nunito text-w700 text-24 text-black">Please finish your payment for vespa</p>
-                      <input type="checkbox" className={Style.check} />
-                    </div>
-                  </div>
-                </div>
-                <h1 className="text-nunito text-36 text-black text-w700">Vehicle</h1>
-                <div className={Style.cardContainer}>
-                  <div className={Style.card}>
-                    <img src="/bike.png" alt="img" className={Style.img} />
-                    <div className={Style.cardDesc}>
-                      <div>
-                        <p className="text-nunito text-24 text-w700">vespa</p>
-                        <p className="text-nuntio text-18">17 Agustus 2021</p>
+                          <div>
+                            <p className="text-nunito text-w700 text-black">Prepayment: Rp. {item.totalPayment}</p>
+                            <p className="text-nunito text-24 text-green">
+                              {item.status === 'waiting for payment'
+                                ? 'Not yet renting'
+                                : item.status === 'active'
+                                ? 'currently renting'
+                                : 'Has been returned'}
+                            </p>
+                          </div>
+                        </div>
                       </div>
-                      <div>
-                        <p className="text-nunito text-w700 text-black">Prepayment: Rp. 250000</p>
-                        <p className="text-nunito text-24 text-green">has been returned</p>
-                      </div>
-                    </div>
-                    <input type="checkbox" className={Style.check} />
-                  </div>
-                </div>
-              </div>
-              <div className={Style.arrivalBox}>
-                <p className="text-playfair text-w900 text-24">New Arrival</p>
-                <Card type="town" title="Merapi" city="yogyakarta" />
-                <Card type="town" title="Monas" city="jakarta" />
-                <p>view more</p>
-              </div>
+                    </a>
+                  </Link>
+                </>
+              ))}
             </div>
-          </>
-        )}
+          </div>
+          <div className={Style.arrivalBox}>
+            <p className="text-playfair text-w900 text-24">New Arrival</p>
+            <Card type="town" title="Merapi" city="yogyakarta" />
+            <Card type="town" title="Monas" city="jakarta" />
+            <p>view more</p>
+          </div>
+        </div>
       </Layout>
     </div>
   );
@@ -153,7 +82,7 @@ export const getServerSideProps = async (context) => {
   if (context.req) {
     cookie = context.req.headers.cookie;
   }
-  let result
+  let result;
   if (cookie.role === 'user') {
     result = await axios.get(`${process.env.REACT_APP_API_URL}/reservation/user/${cookie.role}`, {
       withCredentials: true,
