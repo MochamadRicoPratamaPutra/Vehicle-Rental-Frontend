@@ -4,7 +4,7 @@ import Card from '../components/base/card';
 import { useSelector } from 'react-redux';
 import AuthenticatedRoute from '../components/authenticatedRoute';
 import axios from 'axios';
-import Cookies from 'js-cookie';
+import Cookies from 'next-cookies';
 import Link from 'next/link';
 const History = ({ reservation }) => {
   const user = useSelector((state) => state.user.profile);
@@ -83,7 +83,7 @@ export const getServerSideProps = async (context) => {
   if (context.req) {
     cookie = context.req.headers.cookie;
   }
-  const cookieCheck = Cookies.get()
+  const cookieCheck = Cookies(context)
   let result;
   if (cookieCheck.role === 'user') {
     result = await axios.get(`${process.env.REACT_APP_API_URL}/reservation/user/${cookie.role}`, {
