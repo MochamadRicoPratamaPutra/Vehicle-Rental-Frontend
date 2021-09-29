@@ -153,12 +153,21 @@ export const getServerSideProps = async (context) => {
   if (context.req) {
     cookie = context.req.headers.cookie;
   }
-  const result = await axios.get(`${process.env.REACT_APP_API_URL}/reservation`, {
-    withCredentials: true,
-    headers: {
-      cookie: cookie,
-    },
-  });
+  if (cookie.role === 'user') {
+    const result = await axios.get(`${process.env.REACT_APP_API_URL}/reservation/user/${cookie.role}`, {
+      withCredentials: true,
+      headers: {
+        cookie: cookie,
+      },
+    });
+  } else {
+    const result = await axios.get(`${process.env.REACT_APP_API_URL}/reservation`, {
+      withCredentials: true,
+      headers: {
+        cookie: cookie,
+      },
+    });
+  }
   const reservation = result.data.data;
   console.log(reservation);
   return {
