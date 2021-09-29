@@ -3,6 +3,7 @@ import Style from '../styles/login.module.css';
 import Button from '../components/base/button';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 const Register = () => {
   const [form, setForm] = useState({
     name: '',
