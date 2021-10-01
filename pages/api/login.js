@@ -44,6 +44,8 @@ const login = (req, res) => {
       })
       .catch((error) => {
         console.log(error, 'error');
+        res.status(res.response.status)
+        res.json(error.response.data)
       });
   }
 };
