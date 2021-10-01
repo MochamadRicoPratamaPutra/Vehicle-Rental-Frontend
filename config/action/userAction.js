@@ -21,7 +21,7 @@ export const login = (data) => async (dispatch) => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response);
         reject(err);
       });
   });
