@@ -44,8 +44,9 @@ const login = (req, res) => {
       })
       .catch((error) => {
         console.log(error, 'error');
-        res.status(res.response.status);
-        res.json({ error: error.response.data.error });
+        res.status(401);
+        // res.json({ error: error.response.data.error });
+        res.json({ error: "Wrong username or password" });
       });
   }
 };
