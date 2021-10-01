@@ -24,7 +24,7 @@ const Button = ({ type, to, text, colorCode, data, maxAmount, itemAmount, id, re
         router.push(`/${to}`);
       })
       .catch((err) => {
-        swal(`Error`, `${err}`, 'error');
+        swal(`Error`, `${err?.response?.data?.message}`, 'error');
       });
   };
   const handleRegister = async () => {

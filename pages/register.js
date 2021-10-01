@@ -57,7 +57,7 @@ const Register = () => {
                 onChange={handleChange}
               />
               <input
-                type="text"
+                type="password"
                 name="password"
                 placeholder="Password"
                 className={`text-nunito text-w700 text-24 text-white ${Style.inputBox}`}
