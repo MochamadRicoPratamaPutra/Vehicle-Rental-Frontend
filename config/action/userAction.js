@@ -22,7 +22,7 @@ export const login = (data) => async (dispatch) => {
       })
       .catch((err) => {
         console.log(err.message);
-        reject(err.response.data.error.message);
+        reject(err);
       });
   });
 };
