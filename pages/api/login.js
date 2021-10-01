@@ -7,7 +7,7 @@ const login = (req, res) => {
       email,
       password,
     };
-    console.log(data)
+    console.log(data);
     axios
       .post(`${process.env.REACT_APP_API_URL}/users/login`, data)
       .then((response) => {
@@ -44,8 +44,8 @@ const login = (req, res) => {
       })
       .catch((error) => {
         console.log(error, 'error');
-        res.status(res.response.status)
-        res.json(error.response.data)
+        res.status(res.response.status);
+        res.json({ error: error.response.data.error });
       });
   }
 };
