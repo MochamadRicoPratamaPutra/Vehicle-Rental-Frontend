@@ -38,15 +38,16 @@ const Vehicle = ({ vehicle }) => {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       },
     };
-    console.log(form);
-    console.log(form.img);
-    console.log(form.img.name);
     const formData = new FormData();
     formData.append('name', form.name);
     formData.append('price', form.price);
     formData.append('stock', form.stock);
     formData.append('description', form.description);
-    formData.append('img', form.img, form.img.name);
+    if (form.img.name) {
+      formData.append('img', form.img, form.img.name);
+    } else {
+      formData.append('img', form.img);
+    }
     formData.append('type', form.type);
     formData.append('city', form.city.toLowerCase());
     formData.append('prepayment', form.prepayment);
