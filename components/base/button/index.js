@@ -97,6 +97,24 @@ const Button = ({ type, to, text, colorCode, data, maxAmount, itemAmount, id, re
       .get(`${process.env.REACT_APP_API_URL}/reservation/payment/${id}`, config)
       .then(() => {
         swal('Payment Approved', 'success', 'success');
+        router.push(`/confirmation/confirmationVehicle/${id}`)
+      })
+      .catch((err) => {
+        swal(`Error`, `${err}`, 'error');
+      });
+  };
+  const handleReturn = () => {
+    const config = {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    };
+    console.log(id)
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/reservation/change-status/${id}`, config)
+      .then(() => {
+        swal('Sucess', 'Vehicle Has Been Returned', 'success');
+        router.push(`/confirmation/confirmationVehicle/${id}`)
       })
       .catch((err) => {
         swal(`Error`, `${err}`, 'error');
@@ -328,6 +346,20 @@ const Button = ({ type, to, text, colorCode, data, maxAmount, itemAmount, id, re
             disabled={!city && !typeCar}
           >
             {text}
+          </button>
+        </a>
+      </div>
+    );
+  } else if (type === 'return') {
+    return (
+      <div>
+        <a>
+          <button
+            className={`text-nunito text-24 text-w900 ${Style.button} ${Style.button4} ${Style.color1}`}
+            onClick={handleReturn}
+            disabled={done !== 'active' ? true : false}
+          >
+            Change Status to Returned
           </button>
         </a>
       </div>

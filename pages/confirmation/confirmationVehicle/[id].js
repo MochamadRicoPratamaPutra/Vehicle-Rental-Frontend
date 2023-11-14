@@ -85,7 +85,12 @@ const Confirmation = ({ reservation }) => {
               <p className="text-24 text-nunito text-grey">Payment Method: {reservation.paymentMethod}</p>
             </div>
           </div>
-          <Button type="approve" id={reservation.reservationId} done={reservation.status}/>
+          {
+            reservation.status === 'waiting for payment' ? 
+            <Button type="approve" id={reservation.reservationId} done={reservation.status}/> : 
+            reservation.status === 'active' ? 
+            <Button type="return" id={reservation.reservationId} done={reservation.status}/> : 
+            <Button type="return" id={reservation.reservationId} done={reservation.status}/>}
         </div>
       </Layout>
     </div>
