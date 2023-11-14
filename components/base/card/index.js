@@ -38,10 +38,10 @@ const Card = ({ type, img, title, city, id, margining }) => {
       <div>
         <div className={Style.cardContainer}>
           <img src="/person1.png" alt="person" className={Style.image} />
-          <div className={Style.buttonBox}>
+          {/* <div className={Style.buttonBox}>
             <img src="/previous.svg" alt="prev" />
             <img src="/next.svg" alt="next" />
-          </div>
+          </div> */}
         </div>
       </div>
     );

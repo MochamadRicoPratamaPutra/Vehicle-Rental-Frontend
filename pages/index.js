@@ -95,7 +95,7 @@ export default function Home() {
                 amazing experience to have a ride for wildlife trip!”
               </p>
               <p className="text-22 text-w700 text-nunito">Edward Newgate</p>
-              <p className="text-18 text-nunito text-grey">Founder Circle</p>
+              <p className="text-18 text-nunito text-grey">Circle User</p>
             </div>
             <div className={Style.cardTestimony}>
               <Card type="testimonial" />
