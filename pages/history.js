@@ -53,11 +53,11 @@ const History = ({ reservation }) => {
                           </div>
                           <div>
                             {/* <p className="text-nunito text-w700 text-black">Prepayment: Rp. {item.totalPayment}</p> */}
-                            <p className="text-nunito text-24 text-green">
+                            <p className={`text-nunito text-24 ${!moment(moment(new Date)).isSameOrBefore(item.returnAt) && item.status === 'active' ? 'text-red' : 'text-green'}`}>
                               {item.status === 'waiting for payment'
                                 ? 'Not yet renting'
                                 : item.status === 'active'
-                                ? 'currently renting'
+                                ? moment(moment(new Date)).isSameOrBefore(item.returnAt) ? 'currently renting' : "Hasn't Been Returned Yet"
                                 : 'Has been returned'}
                             </p>
                           </div>
