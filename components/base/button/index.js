@@ -12,7 +12,7 @@ import {
   completeReservation,
 } from '../../../config/action/reservationAction';
 import axios from 'axios';
-const Button = ({ type, to, text, colorCode, data, maxAmount, itemAmount, id, register, done, email, password, disable }) => {
+const Button = ({ type, to, text, colorCode, data, maxAmount, itemAmount, id, register, done, email, password, disable, city, typeCar }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [amount, setAmount] = useState(itemAmount ? itemAmount : 0);
@@ -303,6 +303,29 @@ const Button = ({ type, to, text, colorCode, data, maxAmount, itemAmount, id, re
             className={`text-nunito text-24 text-w900 ${Style.button} ${Style.button4} ${Style.color1}`}
             onClick={handleChangePassword}
             disabled={disable}
+          >
+            {text}
+          </button>
+        </a>
+      </div>
+    );
+  } else if (type === 'explore') {
+    return (
+      <div>
+        <a>
+          <button
+            className={`text-nunito ${Style.button} ${Style.button1} ${Style.color1}`}
+            onClick={() => {
+              if(city && !typeCar) {
+                router.push(`/vehicle-type/city/${city}?page=1&limit=4&sort=asc`)
+              } else if(!city && typeCar) {
+                router.push(`/vehicle-type/${typeCar}?page=1&limit=4&sort=asc`)
+              } 
+              else if(city && type) {
+                router.push(`/search-city-type?city=${city}&type=${typeCar}&page=1&limit=4&sort=asc`)
+              }
+            }}
+            disabled={!city && !typeCar}
           >
             {text}
           </button>

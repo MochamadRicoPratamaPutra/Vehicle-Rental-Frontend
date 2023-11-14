@@ -13,6 +13,8 @@ export default function Home() {
     prepayment: '',
     date: '',
   });
+  const [typeCar, setTypeCar] = useState('')
+  const [city, setCity] = useState("")
   return (
     <div>
       <Layout isAuth={user.id ? true : false} home={true}>
@@ -24,7 +26,7 @@ export default function Home() {
             <hr className={Style.smallLine} />
             <div className={`text-nunito ${Style.choiceBox}`}>
               <form>
-                <select id="destination" name="destination">
+                <select id="destination" name="destination" onChange={(e) => setCity(e.target.value)}>
                   <option disabled selected value>
                     Location
                   </option>
@@ -37,7 +39,7 @@ export default function Home() {
                 <input type="submit" />
               </form>
               <form>
-                <select id="vehicle" name="vehicle">
+                <select id="vehicle" name="vehicle" onChange={(e) => setTypeCar(e.target.value)}>
                   <option disabled selected value>
                     Type
                   </option>
@@ -48,7 +50,7 @@ export default function Home() {
                 <input type="submit" />
               </form>
             </div>
-            <Button />
+            <Button typeCar={typeCar} city={city} type={'explore'} text={'Explore'}/>
           </div>
           <hr className={Style.resLine} />
         </div>
