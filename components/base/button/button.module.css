@@ -22,8 +22,10 @@
   background: none;
   margin-right: 30px;
 }
-.Button button:disabled {
+.button button:disabled {
   background: grey;
+  color: #FFFFFF !important;
+  pointer-events: none;
 }
 .color3 {
   background: rgba(57, 57, 57, 1);

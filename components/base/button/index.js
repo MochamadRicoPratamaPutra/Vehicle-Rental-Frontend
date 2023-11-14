@@ -12,7 +12,7 @@ import {
   completeReservation,
 } from '../../../config/action/reservationAction';
 import axios from 'axios';
-const Button = ({ type, to, text, colorCode, data, maxAmount, itemAmount, id, register, done }) => {
+const Button = ({ type, to, text, colorCode, data, maxAmount, itemAmount, id, register, done, email, password, disable }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [amount, setAmount] = useState(itemAmount ? itemAmount : 0);
@@ -102,6 +102,24 @@ const Button = ({ type, to, text, colorCode, data, maxAmount, itemAmount, id, re
         swal(`Error`, `${err}`, 'error');
       });
   };
+  const handleForgot = () => {
+    axios.get(`${process.env.REACT_APP_API_URL}/users/email-forgot/${email}`).then(() => {
+      swal('Email Sent!', 'Check your email to recover your password', 'success');
+    }).catch((err) => {
+      swal(`Error`, `${err}`, 'error');
+    })
+  }
+  const handleChangePassword = () => {
+    console.log(password)
+    axios.put(`${process.env.REACT_APP_API_URL}/users/forgot/${email}`, {
+      password: password
+    }).then(() => {
+      swal('Password updated!', 'You can login now', 'success');
+      router.push('/login')
+    }).catch((err) => {
+      swal(`Error`, `${err}`, 'error');
+    })
+  }
   if (type == 'registerNav') {
     return (
       <div>
@@ -260,6 +278,33 @@ const Button = ({ type, to, text, colorCode, data, maxAmount, itemAmount, id, re
             onClick={register ? handleRegister : handleLogin}
           >
             {register ? 'Register' : 'Login'}
+          </button>
+        </a>
+      </div>
+    );
+  } else if (type === 'forgotPassword') {
+    return (
+      <div>
+        <a>
+          <button
+            className={`text-nunito text-24 text-w900 ${Style.button} ${Style.button4} ${Style.color1} text-black`}
+            onClick={handleForgot}
+          >
+            {text}
+          </button>
+        </a>
+      </div>
+    );
+  } else if (type === 'changePassword') {
+    return (
+      <div>
+        <a>
+          <button
+            className={`text-nunito text-24 text-w900 ${Style.button} ${Style.button4} ${Style.color1}`}
+            onClick={handleChangePassword}
+            disabled={disable}
+          >
+            {text}
           </button>
         </a>
       </div>
