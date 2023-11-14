@@ -6,6 +6,7 @@ import AuthenticatedRoute from '../components/authenticatedRoute';
 import axios from 'axios';
 import Cookies from 'next-cookies';
 import Link from 'next/link';
+import moment from 'moment'
 const History = ({ reservation }) => {
   const user = useSelector((state) => state.user.profile);
   return (
@@ -13,7 +14,7 @@ const History = ({ reservation }) => {
       <Layout isAuth={user.id ? true : false} history={true}>
         <div className={Style.historyContainer}>
           <div className={Style.left}>
-            <div className={Style.searchChoice}>
+            {/* <div className={Style.searchChoice}>
               <div>
                 <input
                   type="text"
@@ -32,9 +33,9 @@ const History = ({ reservation }) => {
                   <option value="favoriteProduct">Favorite Product</option>
                 </select>
               </div>
-            </div>
+            </div> */}
             <div>
-              <h1 className="text-nunito text-36 text-black text-w700">Payment</h1>
+              <h1 className="text-nunito text-36 text-black text-w700">History & Payment</h1>
             </div>
             <h1 className="text-nunito text-36 text-black text-w700">Vehicle</h1>
             <div className={Style.cardContainer}>
@@ -47,10 +48,11 @@ const History = ({ reservation }) => {
                         <div className={Style.cardDesc}>
                           <div>
                             <p className="text-nunito text-24 text-w700">{item.vehicleName}</p>
-                            <p className="text-nuntio text-18">{item.reservationDate}</p>
+                            <p className="text-nuntio text-18">Rented From: {moment(item.reservationDate).format('LLL')}</p>
+                            <p className="text-nuntio text-18">Return At: {moment(item.returnAt).format('LLL')}</p>
                           </div>
                           <div>
-                            <p className="text-nunito text-w700 text-black">Prepayment: Rp. {item.totalPayment}</p>
+                            {/* <p className="text-nunito text-w700 text-black">Prepayment: Rp. {item.totalPayment}</p> */}
                             <p className="text-nunito text-24 text-green">
                               {item.status === 'waiting for payment'
                                 ? 'Not yet renting'

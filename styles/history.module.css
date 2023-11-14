@@ -80,6 +80,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   height: 100%;
+  flex-basis: 32%;
 }
 .check {
   width: 30px;
