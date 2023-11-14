@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import AuthenticatedRoute from '../../../components/authenticatedRoute';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import moment from 'moment';
 const Confirmation = ({ reservation }) => {
   const user = useSelector((state) => state.user.profile);
   const router = useRouter();
@@ -42,8 +43,15 @@ const Confirmation = ({ reservation }) => {
               </p>
             </div>
             <div className={`${Style.box} ${Style.boxRight} ${Style.date}`}>
-              <p className="text-nunito text-w700 text-24 text-black">Reservation date:</p>
-              <p className="text-nunito text-w700 text-24 text-black">{date}</p>
+              <div>
+                <p className="text-nunito text-w700 text-24 text-black">Reservation date:</p>
+                <p className="text-nunito text-w700 text-24 text-black">{moment(date).format('LLL')}</p>
+              </div>
+              <hr/>
+              <div>
+                <p className="text-nunito text-w700 text-24 text-black">Return at:</p>
+                <p className="text-nunito text-w700 text-24 text-black">{moment(reservation.returnAt).format('LLL')}</p>
+              </div>
             </div>
           </div>
           <div className={Style.detail}>

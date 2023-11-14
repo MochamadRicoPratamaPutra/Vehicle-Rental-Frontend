@@ -34,6 +34,7 @@
 .detail {
   display: flex;
   margin-top: 30px;
+  width: 100%;
 }
 .box {
   border: 1px solid #80918e;
@@ -48,7 +49,7 @@
 }
 .date {
   display: flex;
-  justify-content: space-around;
+  gap: 20px;
 }
 .payment {
   display: flex;
