@@ -51,6 +51,12 @@
 .button {
   outline: none;
   border: none;
+  cursor: pointer;
+}
+.button:disabled {
+  background: grey;
+  color: #FFFFFF !important;
+  pointer-events: none;
 }
 .button4 {
   width: 100%;
