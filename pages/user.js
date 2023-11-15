@@ -6,8 +6,19 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
+import moment from 'moment/moment';
 const User = () => {
   const user = useSelector((state) => state.user.profile);
+  const [dataUser, setDataUser] = useState({
+    name: user.name,
+    address: user.address,
+    birthDate: user.birthDate,
+    email: user.email,
+    profilePicture: user.profilePicture,
+    displayName: user.displayName,
+    gender: user.gender,
+    phone: user.phone
+  })
   const router = useRouter();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -27,7 +38,11 @@ const User = () => {
     if (e.target.files.length !== 0) {
       setImgPrev(URL.createObjectURL(e.target.files[0]));
     }
-    dispatch({ type: 'CHANGE_VALUE', payload: { [e.target.name]: e.target.files[0] } });
+    setDataUser({
+      ...dataUser,
+      profilePicture: e.target.files[0]
+    })
+    // dispatch({ type: 'CHANGE_VALUE', payload: { [e.target.name]: e.target.files[0] } });
   };
   const handleSubmit = (e) => {
     const config = {
@@ -36,19 +51,25 @@ const User = () => {
       },
     };
     const formData = new FormData();
-    formData.append('name', user.name);
-    formData.append('address', user.address);
-    formData.append('birthDate', user.birthDate);
-    formData.append('email', user.email);
-    formData.append('profilePicture', user.profilePicture, user.profilePicture.name);
-    formData.append('displayName', user.displayName);
-    formData.append('phone', user.phone);
-    formData.append('gender', user.gender);
+    formData.append('name', dataUser.name);
+    formData.append('address', dataUser.address);
+    formData.append('birthDate', dataUser.birthDate);
+    formData.append('email', dataUser.email);
+    if (dataUser.profilePicture.name) {
+      formData.append('profilePicture', dataUser.profilePicture, dataUser.profilePicture.name);
+    } else {
+      formData.append('profilePicture', dataUser.profilePicture);
+    }
+    formData.append('displayName', dataUser.displayName);
+    formData.append('phone', dataUser.phone);
+    formData.append('gender', dataUser.gender);
     e.preventDefault();
     axios
       .put(`${process.env.REACT_APP_API_URL}/users/${user.id}`, formData, config)
       .then((res) => {
         swal('Success', 'Successfuly edit your profile', 'success');
+        dispatch({ type: 'UPDATE_USER', payload: res.data.data });
+        router.push('/user')
       })
       .catch((err) => swal('Error', 'error', 'error'));
   };
@@ -101,9 +122,9 @@ const User = () => {
             <p className="text-playfair text-w700 text-48">{user.name}</p>
             <p className="text-nunito text-w700 text-24 text-grey">{user.email}</p>
             <p className="text-nunito text-w700 text-24 text-grey">{user.phone}</p>
-            <p className="text-nunito text-w700 text-24 text-grey">Has been active since 2013</p>
+            {/* <p className="text-nunito text-w700 text-24 text-grey">Has been active since 2013</p> */}
           </div>
-          <div className={Style.gender}>
+          {/* <div className={Style.gender}>
             <div>
               <input
                 type="radio"
@@ -122,7 +143,7 @@ const User = () => {
                 female
               </label>
             </div>
-          </div>
+          </div> */}
           <p className="text-nunito text-w900 text-24">Contacts</p>
           <div className={Style.input}>
             <label htmlFor="email" className="text-nunit text-24 text-grey">
@@ -133,8 +154,11 @@ const User = () => {
               name="email"
               id="email"
               className={`text-nunito text-24 ${Style.inputBox}`}
-              value={user.email}
-              onChange={handleChange}
+              value={dataUser.email}
+              onChange={(e) => setDataUser({
+                ...dataUser,
+                email: e.target.value
+              })}
             />
             <label htmlFor="address" className="text-nunit text-24 text-grey">
               Address:
@@ -144,8 +168,11 @@ const User = () => {
               name="address"
               id="address"
               className={`text-nunito text-24 ${Style.inputBox}`}
-              value={user.address}
-              onChange={handleChange}
+              value={dataUser.address}
+              onChange={(e) => setDataUser({
+                ...dataUser,
+                address: e.target.value
+              })}
             />
             <label htmlFor="phone" className="text-nunit text-24 text-grey">
               Mobile number:
@@ -155,8 +182,11 @@ const User = () => {
               name="phone"
               id="phone"
               className={`text-nunito text-24 ${Style.inputBox}`}
-              value={user.phone}
-              onChange={handleChange}
+              value={dataUser.phone}
+              onChange={(e) => setDataUser({
+                ...dataUser,
+                phone: e.target.value
+              })}
             />
             <p className="text-nunito text-w900 text-24">Identity</p>
             <div className={Style.identity}>
@@ -169,21 +199,29 @@ const User = () => {
                   name="displayName"
                   id="displayName"
                   className={`text-nunito text-24 ${Style.inputBox}`}
-                  value={user.displayName}
-                  onChange={handleChange}
+                  value={dataUser.displayName}
+                  onChange={(e) => setDataUser({
+                ...dataUser,
+                displayName: e.target.value
+              })}
                 />
               </div>
               <div className={Style.identityInput}>
                 <label htmlFor="birthDate" className="text-nunit text-24 text-grey">
-                  DD/MM/YY:
+                  DD/MM/YYYY:
                 </label>
                 <input
-                  type="text"
+                  type="date"
                   name="birthDate"
                   id="birthDate"
                   className={`text-nunito text-24 ${Style.inputBox}`}
-                  value={user.birthDate}
-                  onChange={handleChange}
+                  value={dataUser.birthDate}
+                  onChange={(e) => {
+                    setDataUser({
+                      ...dataUser,
+                      birthDate: moment(e.target.value).format("YYYY-MM-DD")
+                    })
+                  }}
                 />
               </div>
             </div>

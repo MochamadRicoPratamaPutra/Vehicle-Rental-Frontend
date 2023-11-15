@@ -40,7 +40,10 @@ const userReducer = (state = initialState, action) => {
     case 'UPDATE_USER':
       return {
         ...state,
-        profile: action.payload,
+        profile: {
+          ...state.profile,
+          ...action.payload
+        },
       };
     case 'LOGOUT':
       return {
