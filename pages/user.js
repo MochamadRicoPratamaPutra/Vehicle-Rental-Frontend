@@ -208,7 +208,7 @@ const User = () => {
               </div>
               <div className={Style.identityInput}>
                 <label htmlFor="birthDate" className="text-nunit text-24 text-grey">
-                  DD/MM/YYYY:
+                  Birthdate:
                 </label>
                 <input
                   type="date"
@@ -235,8 +235,27 @@ const User = () => {
                 Save changes
               </button>
             </a>
-            <Button type="confirmation" text="Edit Password" />
-            <Button type="confirmation" text="Cancel" />
+            {/* <Button type="confirmation" text="Edit Password" /> */}
+            <div>
+              <a>
+                <button
+                  className={`text-nunito text-24 text-w900 ${Style.button} ${Style.button4} ${Style.color1} text-black`}
+                  onClick={() => router.push('/change-password')}
+                >
+                  Edit Password
+                </button>
+              </a>
+            </div>
+            <div>
+              <a>
+                <button
+                  className={`text-nunito text-24 text-w900 ${Style.button} ${Style.button4} ${Style.color1} text-black`}
+                  onClick={() => router.push('/')}
+                >
+                  Cancel
+                </button>
+              </a>
+            </div>
             <a>
               <button
                 className={`text-nunito text-24 text-w900 ${Style.button} ${Style.button4} ${Style.colorAlert} text-black`}
