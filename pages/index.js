@@ -80,7 +80,7 @@ export default function Home() {
             <Card type="town" title="Merapi" city="yogyakarta" />
             <Card type="town" title="Monas" city="jakarta" />
             <Card type="town" title="Lembang" city="bandung" />
-            <Card type="town" title="Bromo" city="malang1" />
+            <Card type="town" title="Bromo" city="malang" />
           </div>
           <p className="text-playfair text-36 text-bold">Testimonial</p>
           <div className={Style.testimonyBox}>

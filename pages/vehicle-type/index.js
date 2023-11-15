@@ -22,7 +22,7 @@ const VehicleType = ({ bike, car, motorcycle }) => {
             <Card type="town" title="Merapi" city="yogyakarta" />
             <Card type="town" title="Monas" city="jakarta" />
             <Card type="town" title="Lembang" city="bandung" />
-            <Card type="town" title="Bromo" city="malang1" />
+            <Card type="town" title="Bromo" city="malang" />
           </div>
           <div className={Style.cardTitle}>
             <p className="text-playfair text-36 text-bold">Car</p>
