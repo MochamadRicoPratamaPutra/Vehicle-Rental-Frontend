@@ -34,9 +34,9 @@ const ForgotPassword = () => {
                 />
                 <Button type="changePassword" text="Change Password" disable={password !== reTypePassword} email={router.query.email} password={password}/>
               </div>
-              <p className="text-nunito text-w700 text-24 text-white">
+              {/* <p className="text-nunito text-w700 text-24 text-white">
                 You will receive a link to reset your password. If you haven’t received any link, click Resend Link
-              </p>
+              </p> */}
             </div>
           </div>
         </div>
