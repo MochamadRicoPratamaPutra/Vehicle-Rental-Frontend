@@ -280,8 +280,9 @@ const Button = ({ type, to, text, colorCode, data, maxAmount, itemAmount, id, re
     return (
       <div>
         <button
-          className={`text-nunito text-24 text-w900 ${Style.button} ${Style.button4} ${Style.color1} text-black`}
+          className={`text-nunito text-24 text-w900 ${Style.button} ${Style.button4} ${Style.color1} text-black ${Style.buttonReservation}`}
           onClick={handleReservation}
+          disabled={disable}
         >
           Reservation
         </button>

@@ -83,6 +83,7 @@ const Vehicle = ({ vehicle }) => {
       }
     });
   };
+  console.log(vehicle)
   return (
     <div>
       <Layout isAuth={user.id ? true : false} vehicle={true}>
@@ -100,7 +101,7 @@ const Vehicle = ({ vehicle }) => {
                     <p className="text-playfair text-36 text-grey">{vehicle.city}</p>
                   </div>
                   <div>
-                    <p className="text-green text-nunito text-bold">Avaliable</p>
+                    <p className={`${vehicle.quantityAvailability ? 'text-green' : 'text-red'} text-nunito text-bold`}>{vehicle.quantityAvailability ? 'Avaliable' : 'Not Available'}</p>
                     <p className="text-nunito text-red">
                       {vehicle.prepayment === 0 ? 'No Prepayment' : 'Can Prepayment'}
                     </p>
@@ -118,7 +119,7 @@ const Vehicle = ({ vehicle }) => {
               </div>
               <div className={Style.buttonBox}>
                 <Button type="reservation" to="chat" text="Chat admin" colorCode={2} />
-                <Button type="addReservation" colorCode={1} data={vehicle} />
+                <Button type="addReservation" colorCode={1} data={vehicle} disable={!vehicle.quantityAvailability}/>
                 <Button type="like" to="#" />
               </div>
             </>

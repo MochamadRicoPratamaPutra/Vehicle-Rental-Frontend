@@ -27,6 +27,13 @@
   color: #FFFFFF !important;
   pointer-events: none;
 }
+
+.buttonReservation:disabled {
+  background: grey;
+  color: #FFFFFF !important;
+  pointer-events: none;
+}
+
 .color3 {
   background: rgba(57, 57, 57, 1);
 }
